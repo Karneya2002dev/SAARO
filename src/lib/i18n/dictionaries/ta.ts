@@ -1514,7 +1514,7 @@ export const ta: Dictionary = {
     eyebrowLead: "எங்கள்",
     eyebrowStrong: "உறுதிமொழி",
     titleTop: "உங்க பயணம்.",
-    titleBottom: "எங்க Liability.",
+    titleBottom: "எங்க responsibility.",
     imageAlt: "வாடிக்கையாளரின் வாகனத்தை கவனத்துடன் கையாளும் சாரோ ஓட்டுநர்",
     items: {
       safety: "உங்கள் பாதுகாப்பே எங்கள் மெயின் முன்னுரிமை.",
