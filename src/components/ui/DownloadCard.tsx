@@ -20,7 +20,10 @@ export function DownloadCard({
         <QrCode seed={name} className="size-full" />
       </div>
 
-      <div className="flex min-w-0 flex-1 flex-col">
+      {/* The query container the badges size against. This column is what they
+          actually have to fit into, and it varies from ~125px in the xl sidebar
+          to ~245px on a phone — which the viewport width cannot tell them. */}
+      <div className="@container flex min-w-0 flex-1 flex-col">
         <p className="text-[14px] font-semibold leading-tight text-heading">{name}</p>
         <p className="mt-1 text-[11px] leading-[1.35] text-muted">{blurb}</p>
 

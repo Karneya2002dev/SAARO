@@ -59,7 +59,15 @@ export function StoreBadges({
       className={cn(
         // Equal tracks, and one row height shared by both cells.
         "grid gap-2",
-        stores.length > 1 && (size === "sm" ? "grid-cols-1" : "grid-cols-2"),
+        stores.length > 1 &&
+          (size === "sm"
+            /* Side by side as soon as the card can hold two, stacked when it
+               cannot. A container query rather than a breakpoint because these
+               cards appear in six different columns — full width on a phone,
+               a 265px footer column, a 217px xl column — and the page width
+               says nothing about which. */
+            ? "@min-[216px]:grid-cols-2"
+            : "grid-cols-2"),
         className,
       )}
     >
@@ -71,29 +79,25 @@ export function StoreBadges({
           // page a handle on this one, `noreferrer` keeps the path in.
           target="_blank"
           rel="noopener noreferrer"
-          /* Height is a floor, not a fixed size: the Tamil label is longer than
-             the English and has to be free to wrap in a narrow card. */
+          /* Height is a floor, not a fixed size, so a label is free to wrap. */
           className={cn(
             "flex items-center gap-2 rounded-lg bg-heading text-white transition-colors hover:bg-black",
-            size === "sm" ? "min-h-9 px-2.5 py-1.5" : "min-h-11 px-3.5 py-2",
+            size === "sm" ? "min-h-8 px-2 py-1" : "min-h-11 px-3.5 py-2",
           )}
         >
           <span className={cn("grid shrink-0 place-items-center", iconSize)}>
             {store.icon}
           </span>
           <span className="flex min-w-0 flex-col items-start leading-none">
+            {size === "sm" ? null : (
+              <span className="text-[8px] font-medium uppercase tracking-[0.06em] text-white/70">
+                {dict.getItOn}
+              </span>
+            )}
             <span
               className={cn(
-                "font-medium uppercase tracking-[0.06em] text-white/70",
-                size === "sm" ? "text-[7px]" : "text-[8px]",
-              )}
-            >
-              {dict.getItOn}
-            </span>
-            <span
-              className={cn(
-                "mt-0.5 font-semibold leading-tight",
-                size === "sm" ? "text-[11px]" : "text-[13px]",
+                "font-semibold leading-tight",
+                size === "sm" ? "text-[11px]" : "mt-0.5 text-[13px]",
               )}
             >
               {store.name}
