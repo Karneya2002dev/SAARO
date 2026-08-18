@@ -1153,7 +1153,7 @@ export const ta: Dictionary = {
       services: "சேவைகள்",
       pricing: "விலை",
       about: "எங்களைப் பற்றி",
-      drive: "Saaro-வுடன் ஓட்டுங்கள்",
+      drive: "Saaro-வில் சேருங்கள்",
       contact: "கான்டாக்ட்",
       gallery: "கேலரி",
     },
@@ -1188,7 +1188,7 @@ export const ta: Dictionary = {
 
   howItWorks: {
     eyebrow: "இது எப்படி வேலை செய்கிறது",
-    title: "சிம்பிளான 4 ஸ்டெப்ஸ், பாதுகாப்பான பயணம்",
+    title: "Simple 4 ஸ்டெப்ஸ், பாதுகாப்பான பயணம்",
     steps: {
       book: {
         title: "புக் பண்ணுங்கள்",
@@ -1219,8 +1219,8 @@ export const ta: Dictionary = {
 
   services: {
     eyebrow: "எங்க சர்வீஸ்கள்",
-    title: "எல்லா வகை பயணங்களுக்கும் டிரைவர்கள்",
-    from: "தொடங்கி",
+    title: "City முதல் Outstation வரை டிரைவர்கள்",
+  from: "From",
     /* "விவரங்கள்" rather than "விவரங்களைக் காண": the service card gives its
        button about 67px of label width at the 2-up and 3-up breakpoints, and
        the longer phrase needs nearer 100px, so it wrapped to two lines. */
@@ -1249,7 +1249,7 @@ export const ta: Dictionary = {
   servicesPage: {
     /* "சரிபார்க்கப்பட்ட" is the word this site already uses for "verified"
        everywhere else, so the headline matches the rest of the copy. */
-    titleTop: "வெரிஃபை செய்யப்பட்ட தொழில்முறை டிரைவர்கள்",
+    titleTop: "நம்பகமான டிரைவர்கள்.",
     titleBottom: "ஒவ்வொரு பயணத்துக்கும்",
     body: "குறுகிய நகரப் பயணமோ, நீண்ட அவுட்ஸ்டேஷன்ப் பயணமோ, சரக்கு வாகனம் ஓட்டுவதோ — சரிபார்க்கப்பட்ட, அனுபவம் வாய்ந்த, நம்பகமான ஓட்டுநர்களை வெளிப்படையான கட்டணத்தில் வழங்குகிறோம். பயணம் முடிந்ததும் ரொக்கப் பணம்.",
     imageAlt:
@@ -1329,7 +1329,7 @@ export const ta: Dictionary = {
 
   pricingPage: {
     titleTop: "எளிய விலை.",
-    titleBottom: "தெளிவான கட்டணம்..",
+    titleBottom: "தெளிவான கட்டணம்.",
     quote:
       "நாங்கள் வசூலிப்பது இதுதான். அடிப்படைக் விலை, ஒரு கி.மீக்கு, ஒரு நிமிடத்திற்கு – மறைவானது எதுவும் இல்லை.",
     imageAlt:
@@ -1439,8 +1439,8 @@ export const ta: Dictionary = {
   },
 
   aboutPage: {
-    titleTop: "நம்பிக்கையோடு ஓட்டுகிறோம்.",
-    titleBottom: "சிறந்த பயணத்தை தருகிறோம்.",
+    titleTop: "நம்பிக்கையான சேவை.",
+    titleBottom: "சிறந்த பயணம்.",
     bodyOne:
       "ஒரு சிம்பிளான எண்ணத்தில்தான் Saaro Acting Call Drivers தொடங்கப்பட்டது – ஒவ்வொரு வாகன உரிமையாளருக்கும் தேவைப்படும் நேரத்தில் பாதுகாப்பான, நம்பகமான டிரைவர் கிடைக்க வேண்டும்.",
     bodyTwo:
@@ -1526,8 +1526,8 @@ export const ta: Dictionary = {
 
   drivePage: {
     titleTop: "Saaro-வுடன் ஓட்டுங்கள்.",
-    titleLead: "சம்பாதிங்க",
-    titleAccent: "உங்க நேரத்துக்கு ஏற்ற மாதிரி.",
+    // titleLead: "உங்கள் நேரத்தில் சம்பாதிங்க",
+    titleAccent: "உங்கள் நேரத்தில் சம்பாதிங்க.",
     body: "தமிழ்நாட்டின் நம்பகமான driver network-ல் join பண்ணுங்க. Flexible வேலை நேரம், தெளிவான வருமானம், weekly payment மற்றும் verified customer trips கிடைக்கும்.",
     cta: "இப்போதே Apply பண்ணுங்க",
     imageAlt:
@@ -1751,8 +1751,8 @@ export const ta: Dictionary = {
   },
 
   contactPage: {
-    titleTop: "எங்களைத் கான்டாக்ட் கொள்ளுங்கள்",
-    titleBottom: "உங்களுக்கு help பண்ண நாங்கள் ready.",
+    titleTop: "எங்களைத் தொடர்பு கொள்ளுங்கள்.",
+    titleBottom: "உதவ நாங்கள் தயாராக இருக்கிறோம்.",
     bodyOne:
       "FAQ உள்ளதா, ஓட்டுநர் வேண்டுமா, அல்லது Saaro பற்றி மேலும் அறிய வேண்டுமா? ஒரு அழைப்பு அல்லது Message போதும்.",
     bodyTwo:
