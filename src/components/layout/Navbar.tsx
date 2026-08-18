@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -9,21 +10,34 @@ import { cn } from "@/lib/cn";
 import { navLinks, siteConfig } from "@/lib/content";
 import { locales, localeLabels, type Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionaries/en";
+/*
+ * The trimmed export. `logo.jpg` is the same lockup on a 600x600 square, but
+ * the artwork only fills 60% of that height — so at any CSS height the logo
+ * rendered 40% smaller than the box it was given, with the rest white padding.
+ * Cropping to the artwork's own bounds is what makes it read at full size.
+ */
+import LOGO from "@/public/assets/logo-trimmed.jpg";
 
-/** Wordmark: "SAAR" plus the ring-and-dot glyph that stands in for the O. */
+/**
+ * Supplied logo. It is a square stacked lockup, so it can only be as wide as
+ * the bar is tall — the height below is the most the 72/80px bar allows while
+ * keeping clearance. `alt=""` because the link already carries the name.
+ */
 function Wordmark({ home }: { home: string }) {
   return (
-    <Link href={home} className="flex shrink-0 items-center gap-2" aria-label="Saaro home">
-      <span className="text-[26px] font-extrabold leading-none tracking-[-0.03em] text-black sm:text-[30px]">
-        SAAR
-      </span>
-      <span
-        aria-hidden
-        className="grid size-[22px] place-items-center rounded-full border-[3px] border-brand sm:size-[26px]"
-      >
-        <span className="size-[9px] rounded-full bg-accent sm:size-[11px]" />
-      </span>
-      <span className="sr-only">Saaro</span>
+    <Link href={home} className="flex shrink-0 items-center" aria-label="Saaro home">
+      {/* Sized against the bar, which is 72px then 80px tall. The trimmed asset
+          is all artwork, so these heights are what actually shows — at h-14 the
+          logo filled 78% of the mobile bar and left it looking crowded, so the
+          phone size steps down to a little over half. 457x385 means the width
+          is ~1.19x whatever height is set. */}
+      <Image
+        src={LOGO}
+        alt=""
+        priority
+        sizes="(min-width: 640px) 76px, 52px"
+        className="h-11 w-auto sm:h-14 lg:h-16"
+      />
     </Link>
   );
 }
@@ -242,8 +256,8 @@ export function Navbar({
           </ul>
 
           <div className="flex flex-col gap-3 py-5 sm:hidden">
-            <BookDriverDialog {...bookProps} className="h-12 w-full text-[15px]" />
-            <LanguageToggle locale={locale} className="h-12 w-full justify-center" />
+            <BookDriverDialog {...bookProps} className="min-h-12 w-full text-[15px]" />
+            <LanguageToggle locale={locale} className="min-h-12 w-full justify-center" />
           </div>
         </nav>
       </div>

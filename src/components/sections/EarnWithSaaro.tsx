@@ -53,7 +53,7 @@ export async function EarnWithSaaro() {
                 {dict.earn.eyebrow}
               </p>
 
-              <h2 className="mt-2 text-[30px] font-bold leading-[1.15] tracking-[-0.02em] text-white sm:text-[34px]">
+              <h2 className="mt-2 text-h2 font-bold leading-[1.15] tracking-[-0.02em] text-white">
                 {dict.earn.title}
               </h2>
 
@@ -65,7 +65,7 @@ export async function EarnWithSaaro() {
 
               <Link
                 href="#book"
-                className="mt-7 inline-flex h-12 w-fit items-center gap-2.5 rounded-full bg-accent px-6 text-[14px] font-semibold text-heading transition-colors hover:bg-accent/90 sm:text-[15px]"
+                className="mt-7 inline-flex min-h-12 w-fit items-center gap-2.5 rounded-full bg-accent px-6 text-[14px] font-semibold text-heading transition-colors hover:bg-accent/90 sm:text-[15px]"
               >
                 {dict.earn.cta}
                 <ArrowRight className="size-4.5" />

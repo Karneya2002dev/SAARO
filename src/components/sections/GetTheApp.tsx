@@ -20,7 +20,11 @@ export async function GetTheApp() {
   return (
     <section className="bg-white py-10 sm:py-12 lg:py-16">
       <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-5 lg:px-6">
-        <div className="relative isolate mx-auto max-w-[1110px] overflow-hidden rounded-3xl bg-gradient-to-br from-[#f5f7fa] to-[#eceff4] px-6 pt-12 sm:px-10 sm:pt-14 lg:pt-24">
+        {/* Bottom padding only below `lg`. From `lg` the phone is pinned flush
+            to the panel's bottom edge by design, and the two text columns carry
+            their own `lg:pb-20` — but stacked, nothing was holding the last
+            feature off the panel's edge, so it sat on the skyline. */}
+        <div className="relative isolate mx-auto max-w-[1110px] overflow-hidden rounded-3xl bg-gradient-to-br from-[#f5f7fa] to-[#eceff4] px-6 pb-12 pt-12 sm:px-10 sm:pb-14 sm:pt-14 lg:pb-0 lg:pt-24">
           {/* Skyline watermark, anchored to the panel's bottom edge.
               It drifts downward rather than up: sinking only sends the
               buildings' bases past the panel edge, where they are already
@@ -36,17 +40,24 @@ export async function GetTheApp() {
               aria-hidden
               width={1092}
               height={392}
-              sizes="1110px"
+              /* The panel only reaches its 1110px cap once the viewport clears
+                 the container's own gutters; below that it is the full width. */
+              sizes="(min-width: 1160px) 1110px, 100vw"
               className="w-full select-none"
             />
           </Parallax>
 
+          {/* Three columns at `lg`, where the phone and feature list have room
+              beside the copy. Through the tablet band that would leave the copy
+              far too narrow, so it takes the full width and the phone and
+              features pair up beneath it rather than everything stacking at
+              full width down a 1000px-wide panel. */}
           <Reveal
             stagger={0.14}
-            className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_230px_265px] lg:gap-8 xl:gap-10"
+            className="grid gap-12 md:grid-cols-2 md:gap-10 lg:grid-cols-[minmax(0,1fr)_230px_265px] lg:gap-8 xl:gap-10"
           >
             {/* ---- Copy + download cards ---- */}
-            <div className="lg:pb-20">
+            <div className="md:col-span-2 lg:col-span-1 lg:pb-20">
               <p className="text-[14px] font-bold uppercase tracking-[0.08em] text-brand sm:text-[15px]">
                 {dict.getTheApp.eyebrow}
               </p>
@@ -56,7 +67,7 @@ export async function GetTheApp() {
                   into a narrow column. */}
               <h2
                 className={cn(
-                  "mt-4 text-balance text-[30px] font-bold leading-[1.15] tracking-[-0.03em] text-heading sm:text-[38px] lg:text-[41px]",
+                  "mt-4 text-balance text-h2 font-bold leading-[1.15] tracking-[-0.03em] text-heading",
                   locale === "ta" ? "max-w-[24ch]" : "max-w-[16ch]",
                 )}
               >
@@ -71,12 +82,7 @@ export async function GetTheApp() {
                   column is too narrow for that, so the cards stack. */}
               <div className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-1 xl:grid-cols-2">
                 {appDownloads.map((app) => (
-                  <DownloadCard
-                    key={app.id}
-                    name={dict.downloads.items[app.id].name}
-                    blurb={dict.downloads.items[app.id].blurb}
-                    cta={dict.downloads.downloadNow}
-                  />
+                  <DownloadCard key={app.id} app={app.id} dict={dict.downloads} />
                 ))}
               </div>
             </div>
@@ -95,8 +101,12 @@ export async function GetTheApp() {
               />
             </div>
 
-            {/* ---- Feature list ---- */}
-            <div className="relative lg:pb-20">
+            {/* ---- Feature list ----
+                Centred against the phone through the tablet band, where the two
+                share a row and the phone is the taller of them. At `lg` it goes
+                back to filling its column, which is what the dotted connector's
+                offsets are measured against. */}
+            <div className="relative md:self-center lg:self-stretch lg:pb-20">
               <ul className="flex flex-col gap-8 lg:gap-16">
                 {appFeatures.map((feature, index) => {
                   const copy = dict.getTheApp.features[feature.id];

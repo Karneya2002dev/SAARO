@@ -16,9 +16,9 @@ export async function InNumbers() {
   const dict = await getDictionary();
 
   return (
-    <section className="bg-white pb-10 sm:pb-12 lg:pb-16">
+    <section className="bg-white py-10 sm:py-12 lg:py-16">
       <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-5 lg:px-6">
-        <h2 className="text-center text-[19px] font-bold tracking-[-0.01em] text-brand sm:text-[21px]">
+        <h2 className="text-center text-h3 font-bold tracking-[-0.01em] text-brand">
           {dict.inNumbers.title}
         </h2>
 

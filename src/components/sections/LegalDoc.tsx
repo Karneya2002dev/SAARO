@@ -88,7 +88,7 @@ export async function LegalDoc({ doc }: { doc: LegalDocId }) {
 
   return (
     <>
-      <header className="border-b border-line bg-cream py-10 text-center sm:py-12">
+      <header className="border-b border-line bg-cream py-10 sm:py-12 lg:py-16 text-center">
         <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-5 lg:px-6">
           <nav
             aria-label={content.breadcrumb}
@@ -107,13 +107,13 @@ export async function LegalDoc({ doc }: { doc: LegalDocId }) {
             {content.eyebrow}
           </p>
 
-          <h1 className="mt-1 text-[30px] font-bold leading-[1.15] tracking-[-0.025em] text-heading sm:text-[38px] lg:text-[44px]">
+          <h1 className="mt-1 text-hero font-bold leading-[1.15] tracking-[-0.025em] text-heading">
             {content.title}
           </h1>
         </div>
       </header>
 
-      <section className="bg-white py-8 lg:py-10">
+      <section className="bg-white py-10 sm:py-12 lg:py-16">
         <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-5 lg:px-6">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,240px)_minmax(0,1fr)] lg:gap-16">
             {/* Follows the reader down the page on desktop; above the text on
@@ -157,7 +157,7 @@ export async function LegalDoc({ doc }: { doc: LegalDocId }) {
                     className="scroll-mt-24 pb-8 last:pb-0"
                   >
                     <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-                      <h2 className="text-[18px] font-bold tracking-[-0.01em] text-heading sm:text-[19px]">
+                      <h2 className="text-h4 font-bold tracking-[-0.01em] text-heading">
                         {index + 1}. {copy.title}
                       </h2>
 

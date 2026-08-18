@@ -18,7 +18,7 @@ export async function DriverBenefits() {
               {dict.driverBenefits.eyebrow}
             </p>
 
-            <h2 className="mt-3 text-[28px] font-bold leading-[1.2] tracking-[-0.02em] text-heading sm:text-[34px] lg:text-[38px]">
+            <h2 className="mt-3 text-h2 font-bold leading-[1.2] tracking-[-0.02em] text-heading">
               <span className="block">{dict.driverBenefits.titleTop}</span>
               <span className="block">{dict.driverBenefits.titleBottom}</span>
             </h2>

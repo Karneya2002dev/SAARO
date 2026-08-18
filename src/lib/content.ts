@@ -10,6 +10,36 @@ export const siteConfig = {
   email: "Saaractingcalldrivers@gmail.com",
 };
 
+/**
+ * Where each app's store badges point.
+ *
+ * The only place these URLs live — every badge on the site reads from here, so
+ * a published listing is a one-line change.
+ *
+ * !! These are store *searches*, not listings. They resolve to a real page
+ * rather than a dead link, but they are placeholders: replace each with the
+ * listing URL once the app is published, e.g.
+ *   playStore: "https://play.google.com/store/apps/details?id=com.saaro.rider"
+ *   appStore:  "https://apps.apple.com/in/app/saaro-rider/id1234567890"
+ *
+ * Set a field to `null` for a store the app is not on and its badge is dropped
+ * — worth doing for `appStore` while the apps ship as Android APKs, which is
+ * what the shipping policy currently tells customers.
+ */
+export const appStoreLinks: Record<
+  AppDownloadId,
+  { playStore: string | null; appStore: string | null }
+> = {
+  rider: {
+    playStore: "https://play.google.com/store/search?q=Saaro%20Rider&c=apps",
+    appStore: "https://apps.apple.com/in/search?term=Saaro%20Rider",
+  },
+  driver: {
+    playStore: "https://play.google.com/store/search?q=Saaro%20Driver&c=apps",
+    appStore: "https://apps.apple.com/in/search?term=Saaro%20Driver",
+  },
+};
+
 export type ServiceIcon = "building" | "road" | "truck";
 
 export type Service = {
@@ -201,7 +231,9 @@ export const appFeatures: {
   { id: "rated", icon: "star" },
 ];
 
-export const appDownloads: { id: "rider" | "driver" }[] = [
+export type AppDownloadId = "rider" | "driver";
+
+export const appDownloads: { id: AppDownloadId }[] = [
   { id: "rider" },
   { id: "driver" },
 ];
@@ -333,19 +365,18 @@ export const aboutStats: {
   { id: "coverage", icon: "pin", tone: "purple" },
 ];
 
-export type ContactChannelIcon = "phone" | "mail" | "whatsapp" | "pin";
+export type ContactChannelIcon = "mail" | "whatsapp" | "pin";
 
 /**
- * The four ways to reach Saaro. `phone` and `email` read their value from
+ * The ways to reach Saaro. `email` and `whatsapp` read their value from
  * `siteConfig`; `address` has no single value, so its lines live in the
  * dictionary and it renders without a link.
  */
 export const contactChannels: {
-  id: "phone" | "email" | "whatsapp" | "address";
+  id: "email" | "whatsapp" | "address";
   icon: ContactChannelIcon;
   tone: TravelPlanTone;
 }[] = [
-  { id: "phone", icon: "phone", tone: "amber" },
   { id: "email", icon: "mail", tone: "blue" },
   { id: "whatsapp", icon: "whatsapp", tone: "green" },
   { id: "address", icon: "pin", tone: "purple" },

@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { Clipboard, Shield, StarOutline } from "@/components/icons";
 import { ImageSlot } from "@/components/ui/ImageSlot";
+import { RupeeText } from "@/components/ui/Money";
 import { Reveal } from "@/components/ui/Reveal";
 import {
   driveHighlights,
@@ -21,11 +22,11 @@ export async function DriveHero() {
   const image = pageImages.driveHero;
 
   return (
-    <section className="overflow-hidden bg-white py-12 lg:py-16">
+    <section className="overflow-hidden bg-white py-10 sm:py-12 lg:py-16">
       <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-5 lg:px-6">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-14">
           <Reveal stagger={0.12}>
-            <h1 className="text-[30px] font-bold leading-[1.25] tracking-[-0.025em] sm:text-[38px] lg:text-[43px]">
+            <h1 className="text-hero font-bold leading-[1.25] tracking-[-0.025em]">
               <span className="block text-heading">{dict.drivePage.titleTop}</span>
               <span className="mt-2 block text-heading">
                 {dict.drivePage.titleLead}{" "}
@@ -49,7 +50,7 @@ export async function DriveHero() {
 
                     <div className="min-w-0">
                       <p className="text-[14px] font-semibold leading-tight tracking-[-0.01em] text-heading sm:text-[15px]">
-                        {copy.title}
+                        <RupeeText text={copy.title} />
                       </p>
                       <p className="mt-1.5 text-[12px] leading-[1.45] text-muted sm:text-[13px]">
                         {copy.description}

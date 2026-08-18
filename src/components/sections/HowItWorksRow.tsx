@@ -46,7 +46,7 @@ export async function HowItWorksRow() {
   const dict = await getDictionary();
 
   return (
-    <section className="bg-white pb-10 sm:pb-12 lg:pb-16">
+    <section className="bg-white py-10 sm:py-12 lg:py-16">
       <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-5 lg:px-6">
         <Reveal>
           <SectionHeading
@@ -58,7 +58,7 @@ export async function HowItWorksRow() {
         <Reveal
           as="ol"
           stagger={0.12}
-          className="mx-auto mt-12 grid max-w-[1110px] grid-cols-1 gap-y-12 sm:mt-14 sm:grid-cols-2 lg:grid-cols-4 lg:gap-y-0"
+          className="mx-auto mt-12 grid max-w-[1110px] grid-cols-2 gap-x-4 gap-y-10 sm:mt-14 sm:gap-y-12 lg:grid-cols-4 lg:gap-y-0"
         >
           {steps.map((step, index) => {
             const copy = dict.howItWorks.steps[step.id];
@@ -79,7 +79,7 @@ export async function HowItWorksRow() {
                   className="h-auto w-[184px] max-w-full"
                 />
 
-                <h3 className="mt-5 text-[18px] font-semibold tracking-[-0.01em] text-heading sm:text-[19px]">
+                <h3 className="mt-5 text-h4 font-semibold tracking-[-0.01em] text-heading">
                   {copy.title}
                 </h3>
 

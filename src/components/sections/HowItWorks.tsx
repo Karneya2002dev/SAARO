@@ -55,7 +55,7 @@ export async function HowItWorks() {
   const dict = await getDictionary();
 
   return (
-    <section id="how-it-works" className="scroll-mt-24 pb-10 pt-4 sm:pb-12 lg:pb-20">
+    <section id="how-it-works" className="scroll-mt-24 py-10 sm:py-12 lg:py-16">
       <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-5 lg:px-6">
         <Reveal>
           <SectionHeading
@@ -183,7 +183,7 @@ export async function HowItWorks() {
                   {/* Sized in one place so the two columns and the single
                       column read the same. */}
                   <div className="mt-5 md:mt-0">
-                    <h3 className="text-[20px] font-semibold tracking-[-0.02em] text-heading">
+                    <h3 className="text-h3 font-semibold tracking-[-0.02em] text-heading">
                       {copy.title}
                     </h3>
                     <p className="mt-2 text-[15px] leading-[1.6] text-muted">

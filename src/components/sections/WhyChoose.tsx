@@ -37,7 +37,7 @@ export async function WhyChoose() {
         <Reveal
           as="ul"
           stagger={0.08}
-          className="mx-auto mt-12 grid max-w-[1155px] grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 sm:mt-14 md:grid-cols-3 lg:grid-cols-4"
+          className="mx-auto mt-12 grid max-w-[1155px] grid-cols-2 gap-x-4 gap-y-8 sm:mt-14 sm:gap-x-8 sm:gap-y-12 md:grid-cols-3 lg:grid-cols-4"
         >
           {reasons.map((reason, index) => {
             const copy = dict.whyChoose.items[reason.id];
@@ -57,7 +57,7 @@ export async function WhyChoose() {
                   {iconFor[reason.icon]}
                 </span>
 
-                <h3 className="mt-5 text-[18px] font-semibold tracking-[-0.01em] text-heading sm:text-[19px]">
+                <h3 className="mt-5 text-h4 font-semibold tracking-[-0.01em] text-heading">
                   {copy.title}
                 </h3>
 

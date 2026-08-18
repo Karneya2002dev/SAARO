@@ -9,7 +9,7 @@ export async function OurCommitment() {
   const image = pageImages.aboutCommitment;
 
   return (
-    <section className="bg-white pb-10 sm:pb-12 lg:pb-16">
+    <section className="bg-white py-10 sm:py-12 lg:py-16">
       <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-5 lg:px-6">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal stagger={0.12}>
@@ -20,7 +20,7 @@ export async function OurCommitment() {
               <span className="font-semibold">{dict.commitment.eyebrowStrong}</span>
             </p>
 
-            <h2 className="mt-3 text-[28px] font-bold leading-[1.2] tracking-[-0.02em] text-heading sm:text-[34px] lg:text-[38px]">
+            <h2 className="mt-3 text-h2 font-bold leading-[1.2] tracking-[-0.02em] text-heading">
               <span className="block">{dict.commitment.titleTop}</span>
               <span className="block">{dict.commitment.titleBottom}</span>
             </h2>

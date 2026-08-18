@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import {
@@ -18,6 +19,8 @@ import {
   type SocialIcon,
 } from "@/lib/content";
 import { getDictionary, getLocale } from "@/lib/i18n";
+/* Same trimmed export the navbar uses, so both marks are the one asset. */
+import LOGO from "@/public/assets/logo-trimmed.jpg";
 
 const socialIcon: Record<SocialIcon, ReactNode> = {
   facebook: <Facebook className="size-4" />,
@@ -26,18 +29,26 @@ const socialIcon: Record<SocialIcon, ReactNode> = {
   whatsapp: <WhatsApp className="size-4" />,
 };
 
-/** The navbar wordmark recoloured for a dark ground. */
+/**
+ * The real logo, which replaces the drawn "SAAR" + ring this used to
+ * approximate.
+ *
+ * It has to sit on a light chip: the lockup's own background is white and its
+ * wordmark is near-black, so keying the white out would leave the letters
+ * invisible against this footer's #141414. The chip is white rather than the
+ * site's cream so it blends into the artwork's own ground and reads as one
+ * rounded mark rather than a sticker on a panel.
+ */
 function Wordmark({ home }: { home: string }) {
   return (
-    <Link href={home} className="flex w-fit items-center gap-2" aria-label="Saaro home">
-      <span className="text-[28px] font-extrabold leading-none tracking-[-0.03em] text-white">
-        SAAR
-      </span>
-      <span
-        aria-hidden
-        className="grid size-[24px] place-items-center rounded-full border-[3px] border-accent"
-      >
-        <span className="size-[10px] rounded-full bg-accent" />
+    <Link href={home} className="flex w-fit items-center" aria-label="Saaro home">
+      <span className="inline-flex rounded-xl bg-white p-2">
+        <Image
+          src={LOGO}
+          alt=""
+          sizes="80px"
+          className="h-12 w-auto select-none sm:h-14"
+        />
       </span>
     </Link>
   );
@@ -49,11 +60,19 @@ export async function Footer() {
 
   return (
     <footer id="contact" className="scroll-mt-24 bg-[#141414]">
-      <div className="mx-auto w-full max-w-[1200px] px-5 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
-        {/* The download column is fixed; the four text columns share what is
-            left, weighted so each list sits under its own heading. */}
-        <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.72fr)_minmax(0,1fr)_minmax(0,1.1fr)_256px]">
-          <div>
+      {/* Gutters match every page container and the copyright bar below, so the
+          footer's columns line up with the content above it. The vertical
+          padding stays heavier than a section band on purpose — this closes the
+          page rather than sitting between two others. */}
+      <div className="mx-auto w-full max-w-[1200px] px-4 py-16 sm:px-5 sm:py-20 lg:px-6 lg:py-24">
+        {/* Four steps. Phones put the two short link lists side by side rather
+            than stacking everything, which halves the footer's height. The
+            five-column layout waits for xl: at 1024px it left the Quick Links
+            column ~107px and the address ~164px, so Tamil labels and the
+            "Cancellation & Refund Policy" link wrapped badly. lg gets four even
+            columns instead, with the downloads on their own row. */}
+        <div className="grid grid-cols-2 gap-x-4 gap-y-12 sm:gap-x-8 lg:grid-cols-4 xl:grid-cols-[minmax(0,1.15fr)_minmax(0,0.72fr)_minmax(0,1fr)_minmax(0,1.1fr)_256px]">
+          <div className="col-span-2 sm:col-span-1">
             <Wordmark home={home} />
 
             <p className="mt-4 text-[12px] font-bold uppercase tracking-[0.12em] text-white">
@@ -80,7 +99,7 @@ export async function Footer() {
           </div>
 
           <nav aria-label={dict.footer.quickLinks}>
-            <h2 className="text-[16px] font-bold text-white">
+            <h2 className="text-h5 font-bold text-white">
               {dict.footer.quickLinks}
             </h2>
             <ul className="mt-5 flex flex-col gap-3">
@@ -98,7 +117,7 @@ export async function Footer() {
           </nav>
 
           <nav aria-label={dict.footer.legal}>
-            <h2 className="text-[16px] font-bold text-white">{dict.footer.legal}</h2>
+            <h2 className="text-h5 font-bold text-white">{dict.footer.legal}</h2>
             <ul className="mt-5 flex flex-col gap-3">
               {legalLinks.map((link) => (
                 <li key={link.id}>
@@ -113,8 +132,8 @@ export async function Footer() {
             </ul>
           </nav>
 
-          <div>
-            <h2 className="text-[16px] font-bold text-white">{dict.footer.contact}</h2>
+          <div className="col-span-2 sm:col-span-1">
+            <h2 className="text-h5 font-bold text-white">{dict.footer.contact}</h2>
 
             <address className="mt-5 text-[14px] leading-[1.6] text-white/70 not-italic">
               {dict.footer.address.map((line) => (
@@ -146,14 +165,12 @@ export async function Footer() {
             </ul>
           </div>
 
-          <div className="flex flex-col gap-6 sm:col-span-2 lg:col-span-1">
+          {/* Stacked while the column is narrow, side by side once the pair has
+              a full row to itself, and stacked again in the xl sidebar. The
+              child rules let two cards share that row evenly. */}
+          <div className="col-span-2 flex flex-col gap-6 sm:flex-row lg:col-span-4 lg:mx-auto lg:w-full lg:max-w-[680px] xl:col-span-1 xl:mx-0 xl:max-w-none xl:flex-col [&>*]:min-w-0 sm:[&>*]:flex-1">
             {appDownloads.map((app) => (
-              <DownloadCard
-                key={app.id}
-                name={dict.downloads.items[app.id].name}
-                blurb={dict.downloads.items[app.id].blurb}
-                cta={dict.downloads.downloadNow}
-              />
+              <DownloadCard key={app.id} app={app.id} dict={dict.downloads} />
             ))}
           </div>
         </div>

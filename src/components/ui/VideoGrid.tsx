@@ -26,7 +26,7 @@ export function VideoGrid({
 
   return (
     <>
-      <ul className="mx-auto grid max-w-[1000px] grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="mx-auto grid max-w-[1000px] grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-3">
         {visible.map((video) => {
           const copy = dict.items[video.id as keyof typeof dict.items];
           const { src, width, height } = video.thumbnail;
@@ -74,7 +74,7 @@ export function VideoGrid({
               </div>
 
               <div className="flex flex-1 flex-col p-4">
-                <h3 className="text-[15px] font-bold leading-[1.3] tracking-[-0.01em] text-heading">
+                <h3 className="text-h5 font-bold leading-[1.3] tracking-[-0.01em] text-heading">
                   {copy.title}
                 </h3>
                 <p className="mt-2 text-[12px] leading-[1.55] text-muted">

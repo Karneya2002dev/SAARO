@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { ArrowRight } from "@/components/icons";
+import { Money } from "@/components/ui/Money";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { travelPlans, type TravelPlanArt, type TravelPlanTone } from "@/lib/content";
-import { getDictionary } from "@/lib/i18n";
+import { getDictionary, getLocale } from "@/lib/i18n";
 
 /**
  * Tailwind resolves class names at build time, so the per-plan colours have to
@@ -110,10 +111,10 @@ function PlanArt({ art, className }: { art: TravelPlanArt; className?: string })
 }
 
 export async function TravelPlans() {
-  const dict = await getDictionary();
+  const [dict, locale] = await Promise.all([getDictionary(), getLocale()]);
 
   return (
-    <section id="pricing" className="scroll-mt-24 bg-white pb-10 sm:pb-12 lg:pb-16">
+    <section id="pricing" className="scroll-mt-24 bg-white py-10 sm:py-12 lg:py-16">
       <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-5 lg:px-6">
         <Reveal>
           <SectionHeading
@@ -126,7 +127,7 @@ export async function TravelPlans() {
             description wraps. */}
         <Reveal
           stagger={0.1}
-          className="mx-auto mt-12 grid max-w-[1210px] grid-cols-1 gap-6 sm:mt-14 sm:grid-cols-2 lg:grid-cols-4"
+          className="mx-auto mt-12 grid max-w-[1210px] grid-cols-2 gap-4 sm:mt-14 sm:gap-6 lg:grid-cols-4"
         >
           {travelPlans.map((plan, index) => {
             const copy = dict.travelPlans.items[plan.id];
@@ -135,7 +136,7 @@ export async function TravelPlans() {
             return (
               <article
                 key={plan.id}
-                className={`flex h-full flex-col rounded-2xl p-5 ${tone.card}`}
+                className={`flex h-full flex-col rounded-2xl p-4 sm:p-5 ${tone.card}`}
               >
                 <div className="flex items-start justify-between gap-3">
                   <span
@@ -143,10 +144,10 @@ export async function TravelPlans() {
                   >
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <PlanArt art={plan.art} className={`h-20 w-32 ${tone.art}`} />
+                  <PlanArt art={plan.art} className={`h-12 w-16 sm:h-20 sm:w-32 ${tone.art}`} />
                 </div>
 
-                <h3 className="mt-5 text-[17px] font-semibold tracking-[-0.01em] text-heading sm:text-[18px]">
+                <h3 className="mt-5 text-h4 font-semibold tracking-[-0.01em] text-heading">
                   {copy.title}
                 </h3>
 
@@ -161,11 +162,11 @@ export async function TravelPlans() {
                 <p
                   className={`mt-2 text-[28px] font-bold leading-none tracking-[-0.02em] sm:text-[30px] ${tone.price}`}
                 >
-                  ₹{plan.fromPrice}
+                  <Money amount={plan.fromPrice} />
                 </p>
 
                 <Link
-                  href="#book"
+                  href={`/${locale}/pricing`}
                   className={`mt-5 inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border bg-white px-4 py-2 text-center text-[13px] font-medium text-heading transition-colors sm:text-[14px] ${tone.button}`}
                 >
                   {dict.travelPlans.cta}

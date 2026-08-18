@@ -25,11 +25,11 @@ export async function ServicesHero() {
   const dict = await getDictionary();
 
   return (
-    <section className="bg-white py-12 sm:py-16 lg:py-20">
+    <section className="bg-white py-10 sm:py-12 lg:py-16">
       <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-5 lg:px-6">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal stagger={0.12}>
-            <h1 className="text-[32px] font-bold leading-[1.15] tracking-[-0.025em] sm:text-[38px] lg:text-[42px]">
+            <h1 className="text-hero font-bold leading-[1.15] tracking-[-0.025em]">
               <span className="block text-heading">{dict.servicesPage.titleTop}</span>
               <span className="block text-brand">{dict.servicesPage.titleBottom}</span>
             </h1>
@@ -51,7 +51,7 @@ export async function ServicesHero() {
                     </span>
 
                     <div className="min-w-0">
-                      <h2 className="text-[16px] font-semibold tracking-[-0.01em] text-heading sm:text-[17px]">
+                      <h2 className="text-h5 font-semibold tracking-[-0.01em] text-heading">
                         {copy.title}
                       </h2>
                       <p className="mt-1 max-w-[38ch] text-[13px] leading-[1.5] text-muted sm:text-[14px]">

@@ -3,6 +3,7 @@
 import { useId, useMemo, useState } from "react";
 import { Clipboard } from "@/components/icons";
 import type { Dictionary } from "@/lib/i18n/dictionaries/en";
+import { Money } from "@/components/ui/Money";
 
 export type EstimatorVehicle = {
   id: string;
@@ -19,12 +20,6 @@ export type EstimatorPlan = {
   vehicles: EstimatorVehicle[];
 };
 
-/** Whole rupees bare, anything else to the paisa — as in the fare tables. */
-function money(amount: number) {
-  return Number.isInteger(amount)
-    ? `₹${amount.toLocaleString("en-IN")}`
-    : `₹${amount.toFixed(2)}`;
-}
 
 const FIELD =
   "h-12 w-full rounded-lg border border-line bg-white px-3.5 text-[14px] text-heading outline-none transition-colors focus-visible:border-accent";
@@ -98,7 +93,7 @@ export function FareEstimator({
         <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-accent text-white">
           <Clipboard className="size-5" />
         </span>
-        <h3 className="text-[18px] font-semibold tracking-[-0.01em] text-heading sm:text-[19px]">
+        <h3 className="text-h4 font-semibold tracking-[-0.01em] text-heading">
           {dict.title}
         </h3>
       </div>
@@ -218,24 +213,24 @@ export function FareEstimator({
             <dl className="mt-3 flex flex-col gap-2 text-[14px]">
               <div className="flex justify-between gap-4">
                 <dt className="text-muted">{dict.baseFare}</dt>
-                <dd className="text-heading">{money(result.baseFare)}</dd>
+                <dd className="text-heading"><Money amount={result.baseFare} /></dd>
               </div>
               <div className="flex justify-between gap-4">
                 <dt className="text-muted">
                   {dict.distanceRow} ({result.chargedKm} km)
                 </dt>
                 <dd className="text-heading">
-                  {money(Math.round(result.distance))}
+                  <Money amount={Math.round(result.distance)} />
                 </dd>
               </div>
               <div className="flex justify-between gap-4">
                 <dt className="text-muted">{dict.timeRow}</dt>
-                <dd className="text-heading">{money(Math.round(result.time))}</dd>
+                <dd className="text-heading"><Money amount={Math.round(result.time)} /></dd>
               </div>
               <div className="mt-2 flex justify-between gap-4 border-t border-line pt-3">
                 <dt className="font-semibold text-heading">{dict.total}</dt>
                 <dd className="text-[18px] font-bold text-brand">
-                  {money(Math.round(result.total))}
+                  <Money amount={Math.round(result.total)} />
                 </dd>
               </div>
             </dl>

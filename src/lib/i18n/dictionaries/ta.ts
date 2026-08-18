@@ -107,7 +107,9 @@ export const ta: Dictionary = {
   },
 
   servicesPage: {
-    titleTop: "தொழில்முறை ஓட்டுநர்கள்",
+    /* "சரிபார்க்கப்பட்ட" is the word this site already uses for "verified"
+       everywhere else, so the headline matches the rest of the copy. */
+    titleTop: "தொழில்முறையாக சரிபார்க்கப்பட்ட ஓட்டுநர்கள்",
     titleBottom: "ஒவ்வொரு பயணத்திற்கும்",
     body: "குறுகிய நகரப் பயணமோ, நீண்ட வெளியூர்ப் பயணமோ, சரக்கு வாகனம் ஓட்டுவதோ — சரிபார்க்கப்பட்ட, அனுபவம் வாய்ந்த, நம்பகமான ஓட்டுநர்களை வெளிப்படையான கட்டணத்தில் வழங்குகிறோம். பயணம் முடிந்ததும் ரொக்கப் பணம்.",
     imageAlt:
@@ -615,7 +617,6 @@ export const ta: Dictionary = {
       "கேள்விகள் உள்ளதா, ஓட்டுநர் வேண்டுமா, அல்லது Saaro பற்றி மேலும் அறிய வேண்டுமா? ஒரு அழைப்பு அல்லது செய்தி போதும்.",
     bodyTwo:
       "பதிவுகள், ஓட்டுநர் விசாரணைகள், கூட்டாண்மை அல்லது எந்த உதவிக்கும் எங்களைத் தொடர்பு கொள்ளுங்கள்.",
-    call: "இப்போது அழைக்கவும்",
     whatsapp: "WhatsApp செய்யுங்கள்",
     imageAlt:
       "அழைப்பு, மின்னஞ்சல், WhatsApp மற்றும் நேரடி அரட்டை சின்னங்களுடன் மேசையில் அமர்ந்திருக்கும் Saaro உதவி பணியாளர்",
@@ -625,7 +626,6 @@ export const ta: Dictionary = {
   },
 
   contactChannels: {
-    phone: { title: "தொலைபேசி", hint: "எப்போது வேண்டுமானாலும் அழையுங்கள்" },
     email: { title: "மின்னஞ்சல்", hint: "24 மணி நேரத்தில் பதிலளிக்கிறோம்" },
     whatsapp: { title: "WhatsApp", hint: "WhatsApp-ல் எங்களுடன் உரையாடுங்கள்" },
     address: {
@@ -668,7 +668,6 @@ export const ta: Dictionary = {
     /** Leading space intended: it follows the Privacy Policy link inline. */
     consentTail: " ஏற்கிறேன்.",
     submit: "விசாரணை அனுப்பு",
-    troubleLead: "அனுப்ப முடியவில்லையா? நேரடியாக அழைக்கவும்",
   },
 
   terms: {
@@ -1064,6 +1063,11 @@ export const ta: Dictionary = {
 
   downloads: {
     downloadNow: "இப்போது பதிவிறக்கு",
+    /* "Google Play" and "App Store" stay in Latin script — they are the store
+       brands as they are written on the stores themselves. */
+    getItOn: "இதில் பெறுங்கள்",
+    googlePlay: "Google Play",
+    appStore: "App Store",
     items: {
       rider: {
         name: "Saaro Rider",
@@ -1120,7 +1124,7 @@ export const ta: Dictionary = {
       "தமிழ்நாடு (OCPM அரசு பெண்கள்",
       "மேல்நிலைப் பள்ளி எதிரில்)",
     ],
-    copyright: "பதிப்புரிமை 2025 © SAARO அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
+    copyright: "பதிப்புரிமை 2026 © SAARO அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
   },
 
   metadata: {

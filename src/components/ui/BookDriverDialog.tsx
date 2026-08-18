@@ -86,10 +86,7 @@ export function BookDriverDialog({
         <div className="max-h-[min(46rem,calc(100dvh-4rem))] overflow-y-auto overscroll-contain p-6 sm:p-7">
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0">
-              <h2
-                id={`${id}-title`}
-                className="text-[20px] font-bold tracking-[-0.015em] text-heading"
-              >
+              <h2 id={`${id}-title`} className="text-h3 font-bold tracking-[-0.015em] text-heading">
                 {dict.title}
               </h2>
               <p className="mt-1.5 text-[13px] leading-[1.5] text-muted">

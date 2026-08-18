@@ -399,3 +399,52 @@ export const GitHub = (p: IconProps) => (
     <path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2" />
   </svg>
 );
+
+/*
+ * Store marks for the app badges. Both are single filled paths in the same
+ * 24x24 box as the rest of this file, so they take `size-*` like any other icon.
+ */
+
+/** The Google Play triangle, with its four faces as separate tones. */
+export const GooglePlay = (p: IconProps) => (
+  <svg viewBox="0 0 24 24" fill="none" aria-hidden {...p}>
+    <path d="M3.6 2.4a1.4 1.4 0 0 0-.5 1.1v17a1.4 1.4 0 0 0 .5 1.1l9.2-9.6z" fill="#34A853" />
+    <path d="M16.3 15 12.8 12l3.5-3 4.2 2.3c.9.5.9 1.9 0 2.4z" fill="#FBBC04" />
+    <path d="m12.8 12 3.5 3-11.9 6.5c-.4.2-.8.2-1.1 0z" fill="#EA4335" />
+    <path d="M3.3 2.4c.3-.2.7-.2 1.1 0L16.3 9l-3.5 3z" fill="#4285F4" />
+  </svg>
+);
+
+/** The Apple mark. */
+export const AppleLogo = (p: IconProps) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden {...p}>
+    <path d="M16.4 12.7c0-2.2 1.8-3.3 1.9-3.4-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.6.8-3.3.8s-1.8-.8-2.9-.8c-1.5 0-2.9.9-3.7 2.2-1.6 2.7-.4 6.8 1.1 9 .8 1.1 1.7 2.3 2.9 2.2 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.9-2.2.6-.8.8-1.3 1.2-2.2-2.2-.8-2.9-2.9-2.9-3.9M14.2 5.9c.6-.8 1-1.8.9-2.9-.9.1-2 .6-2.7 1.4-.6.7-1 1.7-.9 2.7 1 .1 2-.4 2.7-1.2" />
+  </svg>
+);
+
+/**
+ * The Indian rupee sign, drawn rather than typed.
+ *
+ * The viewBox is cropped to the glyph's own extents including its stroke, so
+ * `h-[…em]` maps predictably onto the surrounding type instead of leaving the
+ * side bearings an icon grid would add. Heavier stroke than the icons above
+ * because it sits beside semibold numerals.
+ */
+export const Rupee = (p: IconProps) => (
+  <svg
+    viewBox="5 2 14 20"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden
+    {...p}
+  >
+    <path d="M6 3h12" />
+    <path d="M6 8h12" />
+    <path d="M6 13h3" />
+    <path d="M9 13c6.667 0 6.667-10 0-10" />
+    <path d="m6 13 8.5 8" />
+  </svg>
+);

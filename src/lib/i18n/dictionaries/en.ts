@@ -105,7 +105,7 @@ export const en = {
   },
 
   servicesPage: {
-    titleTop: "Professional Drivers",
+    titleTop: "Professionally Verified Drivers",
     titleBottom: "for Every Journey",
     body: "Whether it's a short city ride, a long outstation trip, or driving a load vehicle - we provide verified, experienced and dependable drivers at published fares. Cash payment at the end of your trip.",
     imageAlt:
@@ -625,7 +625,6 @@ export const en = {
       "Have questions, need a driver, or want to know more about Saaro? We're just a call or message away.",
     bodyTwo:
       "Reach out to us for bookings, driver inquiries, partnerships, or any support you need.",
-    call: "Call Now",
     whatsapp: "WhatsApp Us",
     imageAlt:
       "A Saaro support agent at a desk, surrounded by call, email, WhatsApp and live chat icons",
@@ -635,7 +634,6 @@ export const en = {
   },
 
   contactChannels: {
-    phone: { title: "Phone", hint: "Call us anytime" },
     email: { title: "Email", hint: "We reply within 24 hours" },
     whatsapp: { title: "WhatsApp", hint: "Chat with us on WhatsApp" },
     address: {
@@ -679,8 +677,6 @@ export const en = {
     /** Tamil puts the verb after the object, so the sentence needs a tail. */
     consentTail: ".",
     submit: "Send enquiry",
-    /** The number itself is rendered as a link, so it is not interpolated. */
-    troubleLead: "Trouble sending? Call us directly at",
   },
 
   terms: {
@@ -1079,6 +1075,15 @@ export const en = {
 
   downloads: {
     downloadNow: "Download Now",
+    /* One lead-in shared by both badges, so the two are the same size whatever
+       the locale. The stores' own wordings differ in length and would make one
+       badge wider than the other.
+
+       Store names stay in Latin script in both locales — they are the brands as
+       they appear on the stores themselves. Only the lead-in translates. */
+    getItOn: "Get it on",
+    googlePlay: "Google Play",
+    appStore: "App Store",
     items: {
       rider: {
         name: "Saaro Rider",
@@ -1135,7 +1140,7 @@ export const en = {
       "Tamil Nadu (Opposite OCPM Government",
       "Girls High School)",
     ],
-    copyright: "Copyright 2025 © SAARO All Rights Reserved.",
+    copyright: "Copyright 2026 © SAARO All Rights Reserved.",
   },
 
   metadata: {

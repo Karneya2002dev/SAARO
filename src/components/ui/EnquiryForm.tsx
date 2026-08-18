@@ -12,11 +12,9 @@ function Req() {
 
 export function EnquiryForm({
   dict,
-  phone,
   privacyHref,
 }: {
   dict: Dictionary["enquiry"];
-  phone: string;
   privacyHref: string;
 }) {
   const id = useId();
@@ -28,7 +26,7 @@ export function EnquiryForm({
       onSubmit={(event) => event.preventDefault()}
       className="flex flex-col"
     >
-      <h2 className="text-[21px] font-bold tracking-[-0.015em] text-heading sm:text-[23px]">
+      <h2 className="text-h3 font-bold tracking-[-0.015em] text-heading">
         {dict.title}
       </h2>
       <p className="mt-1.5 text-[13px] leading-[1.5] text-muted">{dict.blurb}</p>
@@ -184,15 +182,6 @@ export function EnquiryForm({
         {dict.submit}
       </button>
 
-      <p className="mt-4 text-center text-[12px] text-muted">
-        {dict.troubleLead}{" "}
-        <Link
-          href={`tel:+${phone.replace(/\D/g, "")}`}
-          className="font-medium text-accent hover:underline"
-        >
-          {phone}
-        </Link>
-      </p>
     </form>
   );
 }

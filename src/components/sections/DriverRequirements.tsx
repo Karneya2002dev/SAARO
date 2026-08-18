@@ -8,7 +8,7 @@ export async function DriverRequirements() {
   const dict = await getDictionary();
 
   return (
-    <section className="bg-white pb-10 sm:pb-12 lg:pb-16">
+    <section className="bg-white py-10 sm:py-12 lg:py-16">
       <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-5 lg:px-6">
         <Reveal>
           <SectionHeading
@@ -21,7 +21,7 @@ export async function DriverRequirements() {
         <Reveal
           as="ul"
           stagger={0.09}
-          className="mx-auto mt-12 grid max-w-[1180px] grid-cols-1 gap-6 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7"
+          className="mx-auto mt-12 grid max-w-[1180px] grid-cols-2 gap-4 sm:mt-14 sm:gap-6 lg:grid-cols-3 lg:gap-7"
         >
           {driverRequirements.map((requirement) => {
             const copy = dict.driverRequirements.items[requirement.id];
@@ -45,7 +45,7 @@ export async function DriverRequirements() {
                   />
                 </div>
 
-                <h3 className="mt-5 text-[17px] font-semibold tracking-[-0.01em] text-heading sm:text-[18px]">
+                <h3 className="mt-5 text-h4 font-semibold tracking-[-0.01em] text-heading">
                   {copy.title}
                 </h3>
 

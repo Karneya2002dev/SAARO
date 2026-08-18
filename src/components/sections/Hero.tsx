@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
-import { Calendar, Clock, MapPin, Phone } from "@/components/icons";
+import { Calendar, Clock, MapPin } from "@/components/icons";
+import { BookDriverDialog } from "@/components/ui/BookDriverDialog";
 import { WaveDivider } from "@/components/ui/WaveDivider";
 import { cn } from "@/lib/cn";
 import { siteConfig } from "@/lib/content";
@@ -24,9 +24,11 @@ export async function Hero() {
   return (
     <section
       className={cn(
-        // Desktop height tracks the photo's own 1629x919 ratio (56.4% of the
-        // viewport width) so it is never cropped sideways — that crop is what
-        // eats the artwork's white left edge and blows up the driver.
+        // Desktop height follows the photo's own 1628x917 ratio (56.4% of the
+        // viewport width), so from ~1206px up the section and the artwork are
+        // the same shape. The 680px floor below that is what the copy needs;
+        // keeping the photo uncropped through that band is the photo's job now,
+        // not the section's — see the ratio box below.
         "relative isolate w-full overflow-hidden bg-white",
         tall
           ? "lg:min-h-[clamp(680px,56.4vw,920px)]"
@@ -36,8 +38,16 @@ export async function Hero() {
       {/* ---- Photo -----------------------------------------------------
           The artwork already fades to white on its left edge, so on desktop
           it sits full-bleed behind the copy with only a light safety scrim.
-          On mobile it moves below the copy so text never lands on the car. */}
-      <div className="pointer-events-none absolute inset-0 hidden lg:block">
+          On mobile it moves below the copy so text never lands on the car.
+
+          Held to the artwork's own 1628x917 ratio rather than stretched to the
+          section. The section's height has a 680px floor, so between `lg` and
+          1206px it is taller than the photo naturally is — filling it there
+          scaled the photo up and cropped 183px off the sides at `lg`, taking
+          the faded left edge the copy sits on with it. At its own ratio the
+          photo is never cropped sideways; where the section is taller, the
+          wave already covers the difference at every width. */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 hidden aspect-[1628/917] lg:block">
         <Image
           src={DRIVER_IMAGE}
           alt={dict.hero.imageAlt}
@@ -59,7 +69,7 @@ export async function Hero() {
         />
       </div>
 
-      <div className="mx-auto w-full max-w-[1456px] px-5 sm:px-6 lg:h-full lg:px-8">
+      <div className="mx-auto w-full max-w-[1456px] px-4 sm:px-5 lg:h-full lg:px-6">
         {/* Latin centres the copy in the fixed frame; Tamil flows with its own
             padding, since there is no fixed height left to centre against. */}
         <div
@@ -73,32 +83,32 @@ export async function Hero() {
             <span className="block text-brand">{dict.hero.titleBottom}</span>
           </h1>
 
-          <p className="animate-rise mt-7 max-w-[30ch] text-pretty text-[16px] leading-[1.6] text-body sm:text-[18px] lg:mt-9 lg:text-[19px]">
+          {/* The measure cap starts at `sm`. On a phone the column is already
+              a good line length on its own — 37 characters at 360px — so the
+              30ch cap only pulled the copy in short of the button beneath it.
+              From `sm` the column runs to 600px and wide, and the cap is what
+              keeps the line readable. */}
+          <p className="animate-rise mt-7 text-pretty text-[16px] leading-[1.6] text-body sm:max-w-[30ch] sm:text-[18px] lg:mt-9 lg:text-[19px]">
             {dict.hero.body}
           </p>
 
           {/* flex-wrap so a longer localised label drops the second button to
               its own row instead of overflowing the column. */}
           <div className="animate-rise mt-8 flex flex-col gap-3.5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 lg:mt-10">
-            <Link
-              href="#book"
+            {/* Opens the booking form in place rather than scrolling away to
+                an anchor — `triggerClassName` replaces the dialog's own pill so
+                this keeps the hero's button shape. */}
+            <BookDriverDialog
+              label={dict.hero.book}
+              dict={dict.nav.dialog}
+              fields={dict.enquiry}
+              phone={siteConfig.phone}
+              privacyHref={`/${locale}/privacy`}
+              icon={<Calendar className="size-5 shrink-0" />}
               // min-h rather than h: a label that wraps grows the pill instead
               // of spilling out of it.
-              className="inline-flex min-h-14 items-center justify-center gap-2.5 rounded-full bg-brand px-7 py-3 text-center text-[16px] font-medium text-white shadow-[0_10px_28px_-10px_rgba(21,96,58,0.6)] transition-colors hover:bg-brand-dark sm:min-h-[58px] sm:px-8 sm:text-[17px] lg:min-h-[60px] lg:text-[18px]"
-            >
-              <Calendar className="size-5 shrink-0" />
-              {dict.hero.book}
-            </Link>
-
-            <Link
-              href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
-              className="inline-flex min-h-14 items-center justify-center gap-2.5 rounded-full border border-line bg-white px-7 py-3 text-center text-[16px] font-medium text-heading shadow-[0_8px_24px_-14px_rgba(17,17,17,0.35)] transition-colors hover:bg-surface sm:min-h-[58px] sm:px-8 sm:text-[17px] lg:min-h-[60px] lg:text-[18px]"
-            >
-              <Phone className="size-5 shrink-0" />
-              <span className="whitespace-nowrap">
-                {dict.hero.call.replace("{phone}", siteConfig.phone)}
-              </span>
-            </Link>
+              triggerClassName="inline-flex min-h-14 items-center justify-center gap-2.5 rounded-full bg-brand px-7 py-3 text-center text-[16px] font-medium text-white shadow-[0_10px_28px_-10px_rgba(21,96,58,0.6)] transition-colors hover:bg-brand-dark sm:min-h-[58px] sm:px-8 sm:text-[17px] lg:min-h-[60px] lg:text-[18px]"
+            />
           </div>
 
           <ul className="mt-9 flex flex-col gap-5 sm:flex-row sm:gap-10 lg:mt-12">
@@ -117,7 +127,7 @@ export async function Hero() {
 
       {/* Mobile / tablet photo — full-bleed and offset so the driver, not the
           faded edge, fills the frame. */}
-      <div className="relative aspect-4/3 w-full sm:aspect-video lg:hidden">
+      <div className="relative aspect-4/3 w-full sm:aspect-video md:aspect-auto md:h-[420px] lg:hidden">
         <Image
           src={DRIVER_IMAGE}
           alt={dict.hero.imageAlt}

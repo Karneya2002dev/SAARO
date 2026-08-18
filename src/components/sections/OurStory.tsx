@@ -55,18 +55,20 @@ export async function OurStory() {
           </Reveal>
 
           <Reveal as="ol" stagger={0.12} className="flex flex-col gap-8">
-            {milestones.map((milestone, index) => {
+            {milestones.map((milestone) => {
               const copy = dict.ourStory.milestones[milestone.id];
 
               return (
-                <li key={milestone.id} className="relative pl-7">
+                <li key={milestone.id} className="group relative pl-7">
                   {/* The rule is per entry rather than one continuous spine,
-                      so the gaps between milestones stay visible. */}
+                      so the gaps between milestones stay visible.
+
+                      Every entry reads the same at rest; the accent is purely
+                      the hover response, so it only ever marks the one being
+                      read rather than singling out a milestone. */}
                   <span
                     aria-hidden
-                    className={`absolute inset-y-0 left-0 w-1 rounded-full ${
-                      index === 0 ? "bg-accent" : "bg-line"
-                    }`}
+                    className="absolute inset-y-0 left-0 w-1 rounded-full bg-line transition-colors duration-200 group-hover:bg-accent"
                   />
 
                   <p className="text-[15px] font-semibold tracking-[-0.01em] text-heading sm:text-[16px]">

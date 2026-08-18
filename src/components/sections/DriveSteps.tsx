@@ -9,7 +9,7 @@ export async function DriveSteps() {
   const image = pageImages.driveSteps;
 
   return (
-    <section className="bg-white pb-10 sm:pb-12 lg:pb-16">
+    <section className="bg-white py-10 sm:py-12 lg:py-16">
       <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-5 lg:px-6">
         <Reveal>
           <SectionHeading
@@ -34,29 +34,31 @@ export async function DriveSteps() {
           <Reveal as="ol" stagger={0.12} className="flex flex-col gap-8">
             {driveSteps.map((step, index) => {
               const copy = dict.driveSteps.items[step.id];
-              const isFirst = index === 0;
 
               return (
-                <li key={step.id} className="relative flex items-start gap-5 pl-6">
+                <li
+                  key={step.id}
+                  className="group relative flex items-start gap-5 pl-6"
+                >
                   {/* Per-entry rule rather than one continuous spine, so the
-                      gaps between steps stay visible. */}
+                      gaps between steps stay visible.
+
+                      Every step reads the same at rest; the accent is purely
+                      the hover response, so it only ever marks the one being
+                      read rather than singling out a step. */}
                   <span
                     aria-hidden
-                    className={`absolute inset-y-0 left-0 w-1 rounded-full ${
-                      isFirst ? "bg-accent" : "bg-line"
-                    }`}
+                    className="absolute inset-y-0 left-0 w-1 rounded-full bg-line transition-colors duration-200 group-hover:bg-accent"
                   />
 
-                  <span
-                    className={`grid size-14 shrink-0 place-items-center rounded-full text-[15px] font-semibold text-heading ${
-                      isFirst ? "bg-accent" : "border border-line bg-white"
-                    }`}
-                  >
+                  {/* The border stays put and only changes colour, so filling
+                      the badge on hover cannot nudge the number. */}
+                  <span className="grid size-14 shrink-0 place-items-center rounded-full border border-line bg-white text-[15px] font-semibold text-heading transition-colors duration-200 group-hover:border-accent group-hover:bg-accent">
                     {String(index + 1).padStart(2, "0")}
                   </span>
 
                   <div className="min-w-0 pt-1.5">
-                    <h3 className="text-[16px] font-semibold tracking-[-0.01em] text-heading sm:text-[17px]">
+                    <h3 className="text-h5 font-semibold tracking-[-0.01em] text-heading">
                       {copy.title}
                     </h3>
                     <p className="mt-2 text-[13px] leading-[1.55] text-muted sm:text-[14px]">

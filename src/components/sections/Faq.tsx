@@ -48,7 +48,7 @@ export async function Faq({
               className="group overflow-hidden rounded-xl border-l-4 border-transparent bg-white shadow-card open:border-accent"
             >
               <summary className="flex cursor-pointer list-none items-center justify-between gap-5 px-6 py-5 [&::-webkit-details-marker]:hidden">
-                <h3 className="text-[15px] font-medium leading-snug text-heading sm:text-[16px]">
+                <h3 className="text-h5 font-medium leading-snug text-heading">
                   {copy.question}
                 </h3>
 

@@ -9,6 +9,7 @@ import {
   type TravelPlanTone,
 } from "@/lib/content";
 import { getDictionary } from "@/lib/i18n";
+import { Money } from "@/components/ui/Money";
 
 /** Same colour families as the plan cards, applied to table furniture. */
 const toneStyles: Record<
@@ -45,15 +46,6 @@ const toneStyles: Record<
   },
 };
 
-/**
- * Whole rupees carry no decimals; anything else is shown to the paisa, so
- * ₹2 and ₹0.70 both read as deliberate rather than truncated.
- */
-function money(amount: number) {
-  return Number.isInteger(amount)
-    ? `₹${amount.toLocaleString("en-IN")}`
-    : `₹${amount.toFixed(2)}`;
-}
 
 export async function FareTables() {
   const dict = await getDictionary();
@@ -166,13 +158,13 @@ export async function FareTables() {
                           </th>
 
                           <td className="border-l border-line px-4 py-5 align-middle text-[15px] text-heading">
-                            {money(row.baseFare)}
+                            <Money amount={row.baseFare} />
                           </td>
                           <td className="border-l border-line px-4 py-5 align-middle text-[15px] text-heading">
-                            {money(row.perKm)}
+                            <Money amount={row.perKm} />
                           </td>
                           <td className="border-l border-line px-4 py-5 align-middle text-[15px] text-heading">
-                            {money(row.perMinute)}
+                            <Money amount={row.perMinute} />
                           </td>
                           <td className="border-l border-line px-4 py-5 align-middle text-[15px] text-heading">
                             {row.minDistanceKm === null ? (

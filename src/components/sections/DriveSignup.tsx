@@ -20,7 +20,7 @@ export async function DriveSignup() {
   const panel = dict.driveSignup.panel;
 
   return (
-    <section id="apply" className="scroll-mt-24 bg-cream pb-10 sm:pb-12 lg:pb-16">
+    <section id="apply" className="scroll-mt-24 bg-cream py-10 sm:py-12 lg:py-16">
       <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-5 lg:px-6">
         {/* The two panels are one card: no gap between them, and the rounding
             plus clipping live on the wrapper so their inner corners stay
@@ -28,7 +28,7 @@ export async function DriveSignup() {
         <Reveal className="mx-auto grid max-w-[1110px] overflow-hidden rounded-2xl shadow-card lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)]">
           {/* ---- Pitch panel ---- */}
           <div className="flex flex-col bg-[#f7f2e8] p-6 sm:p-8">
-            <h2 className="text-[24px] font-bold leading-[1.2] tracking-[-0.02em] sm:text-[27px]">
+            <h2 className="text-h3 font-bold leading-[1.2] tracking-[-0.02em]">
               <span className="block text-heading">{panel.titleTop}</span>
               <span className="block text-brand">{panel.titleBottom}</span>
             </h2>
@@ -86,6 +86,7 @@ export async function DriveSignup() {
           <div className="bg-white p-6 sm:p-8">
             <DriveSignupForm
               dict={dict.driveSignup.form}
+              downloads={dict.downloads}
               phone={siteConfig.phone}
               privacyHref={`/${locale}/privacy`}
               termsHref={`/${locale}/terms`}

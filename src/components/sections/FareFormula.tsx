@@ -6,13 +6,8 @@ import {
 } from "@/components/ui/FareEstimator";
 import { fareTables } from "@/lib/content";
 import { getDictionary } from "@/lib/i18n";
+import { Money } from "@/components/ui/Money";
 
-/** Whole rupees bare, anything else to the paisa — as in the fare tables. */
-function money(amount: number) {
-  return Number.isInteger(amount)
-    ? `₹${amount.toLocaleString("en-IN")}`
-    : `₹${amount.toFixed(2)}`;
-}
 
 /** The worked example is computed from the published rates rather than typed
  *  out, so it can never contradict the tables above it. */
@@ -79,25 +74,25 @@ export async function FareFormula() {
 
             <p className="mt-4">
               {dict.fareFormula.example.baseFare}{" "}
-              <span className="text-brand">{money(exampleRow.baseFare)}</span>
+              <span className="text-brand"><Money amount={exampleRow.baseFare} /></span>
             </p>
             <p>
               {dict.fareFormula.example.distance} {EXAMPLE.km} km ×{" "}
-              {money(exampleRow.perKm)} ={" "}
-              <span className="text-brand">{money(exampleDistance)}</span>
+              <Money amount={exampleRow.perKm} /> ={" "}
+              <span className="text-brand"><Money amount={exampleDistance} /></span>
             </p>
             <p>
               {dict.fareFormula.example.time} {EXAMPLE.minutes}{" "}
               {dict.fareFormula.example.minutesShort} ×{" "}
-              {money(exampleRow.perMinute)} ={" "}
+              <Money amount={exampleRow.perMinute} /> ={" "}
               <span className="text-brand">
-                {money(Math.round(exampleTime))}
+                <Money amount={Math.round(exampleTime)} />
               </span>
             </p>
             <p className="mt-4">
               ={" "}
               <span className="font-bold text-brand">
-                {money(Math.round(exampleTotal))} {dict.fareFormula.example.total}
+                <Money amount={Math.round(exampleTotal)} /> {dict.fareFormula.example.total}
               </span>{" "}
               <span className="text-muted">
                 {dict.fareFormula.example.totalNote}

@@ -13,7 +13,7 @@ export async function Gallery() {
 
   return (
     <>
-      <header className="bg-cream py-10 text-center sm:py-12">
+      <header className="bg-cream py-10 sm:py-12 lg:py-16 text-center">
         <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-5 lg:px-6">
           <nav
             aria-label={doc.breadcrumb}
@@ -32,13 +32,13 @@ export async function Gallery() {
             {doc.eyebrow}
           </p>
 
-          <h1 className="mt-1 text-[30px] font-bold leading-[1.15] tracking-[-0.025em] text-heading sm:text-[38px] lg:text-[42px]">
+          <h1 className="mt-1 text-hero font-bold leading-[1.15] tracking-[-0.025em] text-heading">
             {doc.title}
           </h1>
         </div>
       </header>
 
-      <section className="bg-white py-8 sm:py-10 lg:py-12">
+      <section className="bg-white py-10 sm:py-12 lg:py-16">
         <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-5 lg:px-6">
           <Reveal>
             <SectionHeading
@@ -57,7 +57,7 @@ export async function Gallery() {
         </div>
       </section>
 
-      <section className="bg-cream py-8 sm:py-10 lg:py-12">
+      <section className="bg-cream py-10 sm:py-12 lg:py-16">
         <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-5 lg:px-6">
           <Reveal>
             <SectionHeading

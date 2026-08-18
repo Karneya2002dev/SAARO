@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { EnquiryForm } from "@/components/ui/EnquiryForm";
 import { Reveal } from "@/components/ui/Reveal";
-import { pageImages, siteConfig } from "@/lib/content";
+import { pageImages } from "@/lib/content";
 import { getDictionary, getLocale } from "@/lib/i18n";
 
 export async function ContactEnquiry() {
@@ -10,7 +10,7 @@ export async function ContactEnquiry() {
   const map = pageImages.contactMap;
 
   return (
-    <section id="enquiry" className="scroll-mt-24 bg-cream pb-10 sm:pb-12 lg:pb-16">
+    <section id="enquiry" className="scroll-mt-24 bg-cream py-10 sm:py-12 lg:py-16">
       <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-5 lg:px-6">
         {/* Map and form share one card, so the map stretches to whatever
             height the form ends up at rather than leaving a ragged edge. */}
@@ -24,11 +24,7 @@ export async function ContactEnquiry() {
             className="h-full max-h-[560px] w-full rounded-xl object-cover lg:max-h-none"
           />
 
-          <EnquiryForm
-            dict={dict.enquiry}
-            phone={siteConfig.phone}
-            privacyHref={`/${locale}/privacy`}
-          />
+          <EnquiryForm dict={dict.enquiry} privacyHref={`/${locale}/privacy`} />
         </Reveal>
       </div>
     </section>

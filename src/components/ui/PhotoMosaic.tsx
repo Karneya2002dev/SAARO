@@ -36,7 +36,7 @@ export function PhotoMosaic({
 
   return (
     <>
-      <div className="mx-auto grid max-w-[1000px] grid-cols-1 gap-4 sm:h-[clamp(320px,42vw,470px)] sm:grid-cols-[1.05fr_0.5fr_0.5fr] sm:grid-rows-2">
+      <div className="mx-auto grid max-w-[1000px] grid-cols-2 gap-4 sm:h-[clamp(320px,42vw,470px)] sm:grid-cols-[1.05fr_0.5fr_0.5fr] sm:grid-rows-2">
         {visible.map((photo, index) => {
           const label = alt[photo.id as keyof typeof alt] ?? "";
           const { src, width, height } = photo.image;
@@ -51,7 +51,7 @@ export function PhotoMosaic({
                   src={src}
                   alt={label}
                   fill
-                  sizes="(min-width: 640px) 50vw, 100vw"
+                  sizes="50vw"
                   className="object-cover"
                 />
               ) : (

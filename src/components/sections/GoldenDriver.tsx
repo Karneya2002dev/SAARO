@@ -7,7 +7,7 @@ export async function GoldenDriver() {
   const dict = await getDictionary();
 
   return (
-    <section className="bg-cream pb-8 sm:pb-10 lg:pb-12">
+    <section className="bg-cream py-10 sm:py-12 lg:py-16">
       <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-5 lg:px-6">
         <Reveal className="mx-auto flex max-w-[1110px] flex-col gap-6 rounded-2xl bg-[#131a33] px-6 py-7 sm:px-8 md:flex-row md:items-center md:justify-between md:gap-10">
           <div className="flex items-center gap-5 sm:gap-6">

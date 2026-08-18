@@ -8,7 +8,7 @@ export async function AboutIntro() {
   const image = pageImages.aboutIntro;
 
   return (
-    <section className="bg-white py-12 sm:py-16 lg:py-20">
+    <section className="bg-white py-10 sm:py-12 lg:py-16">
       <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-5 lg:px-6">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <Reveal>
@@ -23,7 +23,7 @@ export async function AboutIntro() {
           </Reveal>
 
           <Reveal stagger={0.12}>
-            <h1 className="text-[28px] font-bold leading-[1.2] tracking-[-0.02em] sm:text-[34px] lg:text-[38px]">
+            <h1 className="text-hero font-bold leading-[1.2] tracking-[-0.02em]">
               <span className="block text-heading">{dict.aboutPage.titleTop}</span>
               <span className="block text-brand">{dict.aboutPage.titleBottom}</span>
             </h1>

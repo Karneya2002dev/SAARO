@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useId, useState } from "react";
 import { ArrowRight, Download, Upload } from "@/components/icons";
 import { FIELD, LABEL } from "@/components/ui/field";
+import { StoreBadges } from "@/components/ui/StoreBadges";
 import type { Dictionary } from "@/lib/i18n/dictionaries/en";
 
 /** Numbered step marker beside each fieldset legend. */
@@ -45,11 +46,14 @@ function UploadBox({ label, hint }: { label: string; hint: string }) {
 
 export function DriveSignupForm({
   dict,
+  downloads,
   phone,
   privacyHref,
   termsHref,
 }: {
   dict: Dictionary["driveSignup"]["form"];
+  /** Passed through to the store badges under the form. */
+  downloads: Dictionary["downloads"];
   phone: string;
   privacyHref: string;
   termsHref: string;
@@ -63,7 +67,7 @@ export function DriveSignupForm({
       onSubmit={(event) => event.preventDefault()}
       className="flex flex-col"
     >
-      <h3 className="text-[20px] font-semibold tracking-[-0.01em] text-heading sm:text-[22px]">
+      <h3 className="text-h3 font-semibold tracking-[-0.01em] text-heading">
         {dict.title}
       </h3>
       <p className="mt-1.5 text-[13px] text-muted">{dict.blurb}</p>
@@ -246,13 +250,22 @@ export function DriveSignupForm({
         {dict.trouble.replace("{phone}", phone)}
       </p>
 
-      <Link
-        href="#"
-        className="mx-auto mt-4 inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-line px-5 py-2 text-[12px] font-medium text-heading transition-colors hover:bg-surface"
-      >
-        <Download className="size-4 shrink-0" />
-        {dict.downloadApp}
-      </Link>
+      {/* The label was a button to nowhere; it now captions the real store
+          links instead of pretending to be one. */}
+      <div className="mt-5 flex flex-col items-center gap-2 border-t border-line pt-5">
+        <p className="flex items-center gap-1.5 text-[12px] font-medium text-heading">
+          <Download className="size-4 shrink-0" />
+          {dict.downloadApp}
+        </p>
+        {/* Capped rather than left to fill the panel, so the two equal columns
+            stay badge-sized instead of stretching half the form each. */}
+        <StoreBadges
+          app="driver"
+          dict={downloads}
+          size="md"
+          className="mx-auto w-full max-w-[330px]"
+        />
+      </div>
     </form>
   );
 }
