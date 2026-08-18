@@ -1262,7 +1262,7 @@ export const ta: Dictionary = {
   travelPlans: {
     eyebrow: "சர்வீஸ் ஆப்ஷன்கள்",
     title: "உங்களுக்கு ஏற்ற டிரிப் பிளானை தேர்வு செய்யுங்கள்",
-    startsFrom: "தொடங்கி",
+    startsFrom: "From",
     cta: "விலையை பார்க்க",
     items: {
       cityLimit: {
