@@ -1526,7 +1526,7 @@ export const ta: Dictionary = {
 
   drivePage: {
     titleTop: "Saaro-வுடன் ஓட்டுங்கள்.",
-    // titleLead: "உங்கள் நேரத்தில் சம்பாதிங்க",
+    titleLead: "",
     titleAccent: "உங்கள் நேரத்தில் சம்பாதிங்க.",
     body: "தமிழ்நாட்டின் நம்பகமான driver network-ல் join பண்ணுங்க. Flexible வேலை நேரம், தெளிவான வருமானம், weekly payment மற்றும் verified customer trips கிடைக்கும்.",
     cta: "இப்போதே Apply பண்ணுங்க",
