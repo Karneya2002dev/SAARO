@@ -59,6 +59,12 @@ export function StoreBadges({
       className={cn(
         // Equal tracks, and one row height shared by both cells.
         "grid gap-2",
+        /* Sized to the badges, not to the column. Stacked, a grid fills its
+           container, which stretched each badge to whatever width the card
+           happened to give it — around 185px for ~102px of content. `fit-content`
+           makes the track the wider of the two labels instead, so the pair stays
+           the same width as each other without running the width of the card. */
+        size === "sm" && "w-fit",
         stores.length > 1 &&
           (size === "sm"
             /* Side by side as soon as the card can hold two, stacked when it

@@ -72,25 +72,29 @@ export async function EarnWithSaaro() {
               </Link>
             </div>
 
-         
+
+          {/* Four across at every width — at three the fourth dropped to a row
+              of its own. A phone panel leaves about 240px for the row at 320px,
+              so the disc and the label both come down to fit four columns into
+              it; both return to full size from `sm`. */}
           <div className="flex justify-center">
-  <ul className="grid grid-cols-3 gap-6 sm:grid-cols-4 sm:gap-8 lg:gap-10">
-    {driverPerks.map((perk) => (
-      <li
-        key={perk.id}
-        className="flex flex-col items-center text-center"
-      >
-        <span className="grid size-13 place-items-center rounded-full bg-white/10 text-accent ring-1 ring-white/30">
-          {iconFor[perk.icon]}
-        </span>
-        <p className="mt-3 text-[13px] font-medium leading-[1.35] text-white sm:text-[14px]">
-          {dict.earn.perks[perk.id]}
-        </p>
-      </li>
-    ))}
-  </ul>
-</div>
- 
+            <ul className="grid grid-cols-4 gap-2 sm:gap-8 lg:gap-10">
+              {driverPerks.map((perk) => (
+                <li
+                  key={perk.id}
+                  className="flex flex-col items-center text-center"
+                >
+                  <span className="grid size-11 place-items-center rounded-full bg-white/10 text-accent ring-1 ring-white/30 sm:size-13">
+                    {iconFor[perk.icon]}
+                  </span>
+                  <p className="mt-2 text-[11px] font-medium leading-[1.35] text-white sm:mt-3 sm:text-[14px]">
+                    {dict.earn.perks[perk.id]}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           </div>
 
           {/* Cut off at the shoulders, so he stands on the panel's bottom edge. */}

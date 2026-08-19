@@ -27,7 +27,7 @@ export async function InNumbers() {
         <Reveal
           as="ul"
           stagger={0.1}
-          className="mt-10 grid grid-cols-2 gap-y-12 sm:mt-12 lg:grid-cols-4 lg:gap-y-0"
+          className="mt-10 grid ta-stack grid-cols-2 gap-y-12 sm:mt-12 lg:grid-cols-4 lg:gap-y-0"
         >
           {stats.map((stat) => {
             const copy = dict.inNumbers.items[stat.id];

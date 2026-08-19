@@ -26,7 +26,7 @@ export function VideoGrid({
 
   return (
     <>
-      <ul className="mx-auto grid max-w-[1000px] grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-3">
+      <ul className="mx-auto grid max-w-[1000px] ta-stack grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-3">
         {visible.map((video) => {
           const copy = dict.items[video.id as keyof typeof dict.items];
           const { src, width, height } = video.thumbnail;

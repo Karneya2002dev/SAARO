@@ -20,7 +20,10 @@ export async function PricingBanner() {
             <div className="min-w-0">
               {/* The two rates are deliberately one block of copy, so the
                   break stays put instead of reflowing mid-sentence. */}
-              <p className="text-[18px] font-semibold leading-[1.4] tracking-[-0.01em] text-heading sm:text-[20px]">
+              {/* Smaller on phones: at 18px the Tamil line needs 246px and
+                  the copy column beside the icon is 156px at 320px, so each
+                  rate broke across two lines and the block ran to four. */}
+              <p className="text-[15px] font-semibold leading-[1.4] tracking-[-0.01em] text-heading sm:text-[18px] md:text-[20px]">
                 <RupeeText text={dict.pricingBanner.lineOne} />
                 <br />
                 <RupeeText text={dict.pricingBanner.lineTwo} />
@@ -35,10 +38,10 @@ export async function PricingBanner() {
               stamped look of the design. */}
           <Link
             href={`/${locale}/pricing`}
-            className="inline-flex min-h-14 w-fit shrink-0 items-center gap-2.5 rounded-full border-2 border-heading bg-accent px-6 text-[14px] font-semibold text-heading shadow-[3px_4px_0_0_var(--color-heading)] transition-transform hover:-translate-y-0.5 sm:text-[15px]"
+            className="inline-flex min-h-11 w-fit shrink-0 items-center gap-2 rounded-full border-2 border-heading bg-accent px-4 text-[13px] font-semibold text-heading shadow-[3px_4px_0_0_var(--color-heading)] transition-transform hover:-translate-y-0.5 sm:min-h-14 sm:gap-2.5 sm:px-6 sm:text-[15px]"
           >
             {dict.pricingBanner.cta}
-            <ArrowRight className="size-4.5" />
+            <ArrowRight className="size-4 shrink-0 sm:size-4.5" />
           </Link>
         </Reveal>
       </div>

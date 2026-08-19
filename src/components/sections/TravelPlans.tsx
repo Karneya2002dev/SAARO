@@ -127,7 +127,7 @@ export async function TravelPlans() {
             description wraps. */}
         <Reveal
           stagger={0.1}
-          className="mx-auto mt-12 grid max-w-[1210px] grid-cols-2 gap-4 sm:mt-14 sm:gap-6 lg:grid-cols-4"
+          className="mx-auto mt-12 grid max-w-[1210px] ta-stack grid-cols-2 gap-4 sm:mt-14 sm:gap-6 lg:grid-cols-4"
         >
           {travelPlans.map((plan, index) => {
             const copy = dict.travelPlans.items[plan.id];

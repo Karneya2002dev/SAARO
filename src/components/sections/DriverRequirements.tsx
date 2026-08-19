@@ -21,7 +21,7 @@ export async function DriverRequirements() {
         <Reveal
           as="ul"
           stagger={0.09}
-          className="mx-auto mt-12 grid max-w-[1180px] grid-cols-2 gap-4 sm:mt-14 sm:gap-6 lg:grid-cols-3 lg:gap-7"
+          className="mx-auto mt-12 grid max-w-[1180px] ta-stack grid-cols-2 gap-4 sm:mt-14 sm:gap-6 lg:grid-cols-3 lg:gap-7"
         >
           {driverRequirements.map((requirement) => {
             const copy = dict.driverRequirements.items[requirement.id];

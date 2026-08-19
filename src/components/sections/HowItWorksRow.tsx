@@ -58,15 +58,40 @@ export async function HowItWorksRow() {
         <Reveal
           as="ol"
           stagger={0.12}
-          className="mx-auto mt-12 grid max-w-[1110px] grid-cols-2 gap-x-4 gap-y-10 sm:mt-14 sm:gap-y-12 lg:grid-cols-4 lg:gap-y-0"
+          className="mx-auto -mb-10 mt-12 grid max-w-[1110px] ta-stack grid-cols-2 grid-rows-[repeat(6,auto)] gap-x-4 sm:-mb-12 sm:mt-14 lg:mb-0 lg:grid-cols-4 lg:grid-rows-[repeat(3,auto)]"
         >
           {steps.map((step, index) => {
             const copy = dict.howItWorks.steps[step.id];
 
             return (
+              /* Illustration, title and copy each take a row track shared with
+                 every other step, so a title running to two lines in English or
+                 four in Tamil no longer starts this step's description lower
+                 than its neighbours'. Subgrid rather than a min-height on the
+                 title, which would have to be guessed per locale and would go
+                 wrong the moment any of this copy changed.
+
+                 Where subgrid is unsupported the declaration is dropped and the
+                 steps lay out as they did before — misaligned, but intact. */
               <li
                 key={step.id}
-                className="relative flex flex-col items-center px-3 text-center"
+                /* Boxed below `lg`, where nothing else groups a step: the four
+                   are otherwise loose on white and the shared row tracks have
+                   no edge to read against. At `lg` the box comes off — the road
+                   between the circles is what joins the steps there, and it
+                   runs from one column into the next, straight across where a
+                   box's background would be.
+
+                   The gap between the two rows of steps rides on this item's
+                   margin, not on the grid's `gap-y` and no longer on the
+                   description's: a subgrid inherits its parent's row gap, so a
+                   gap set there would open up inside every step as well, and a
+                   margin on the copy would land inside the box instead of
+                   between boxes. Every item carries the same margin and padding,
+                   so the two in a row stay aligned with each other. The
+                   container's negative margin takes the same amount back off the
+                   bottom row, which has nothing below it to be separated from. */
+                className="relative row-span-3 mb-10 grid grid-rows-subgrid justify-items-center rounded-2xl bg-surface px-4 py-6 text-center sm:mb-12 lg:mb-0 lg:rounded-none lg:bg-transparent lg:px-3 lg:py-0"
               >
                 {index < steps.length - 1 ? <RoadLink /> : null}
 

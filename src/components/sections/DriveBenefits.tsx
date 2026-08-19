@@ -20,7 +20,7 @@ export async function DriveBenefits() {
         <Reveal
           as="ul"
           stagger={0.1}
-          className="mx-auto mt-12 grid max-w-[1110px] grid-cols-2 gap-x-4 gap-y-8 sm:mt-14 sm:gap-x-8 sm:gap-y-12 lg:grid-cols-4"
+          className="mx-auto mt-12 grid max-w-[1110px] ta-stack grid-cols-2 gap-x-4 gap-y-8 sm:mt-14 sm:gap-x-8 sm:gap-y-12 lg:grid-cols-4"
         >
           {driveBenefits.map((benefit) => {
             const copy = dict.driveBenefits.items[benefit.id];

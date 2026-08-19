@@ -225,7 +225,10 @@ export function DriveSignupForm({
           required
           className="mt-0.5 size-4 shrink-0 accent-brand"
         />
-        <label htmlFor={`${id}-consent`} className="text-[12px] leading-[1.5] text-muted">
+        <label
+          htmlFor={`${id}-consent`}
+          className="cursor-pointer text-[12px] leading-[1.5] text-muted"
+        >
           {dict.consentLead}{" "}
           <Link href={privacyHref} className="text-brand underline">
             {dict.privacy}

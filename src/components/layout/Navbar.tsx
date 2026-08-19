@@ -200,8 +200,17 @@ export function Navbar({
         </nav>
 
         <div className="flex items-center gap-2.5 sm:gap-3">
-          <BookDriverDialog {...bookProps} className="hidden sm:inline-flex" />
-          <LanguageToggle locale={locale} className="hidden sm:inline-flex" />
+          {/* Visibility lives on a wrapper, not on the controls themselves.
+              Both build their own `inline-flex` into their base classes, and
+              `cn` only joins — so passing `hidden` alongside left two display
+              utilities of equal weight on one element, where Tailwind emits
+              `.inline-flex` after `.hidden` and the control stayed on screen at
+              every width. `contents` makes the wrapper generate no box, so from
+              `sm` the buttons sit in this flex row exactly as before. */}
+          <span className="hidden sm:contents">
+            <BookDriverDialog {...bookProps} />
+            <LanguageToggle locale={locale} />
+          </span>
 
           <button
             type="button"

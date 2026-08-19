@@ -35,7 +35,7 @@ export async function AboutStats() {
         <Reveal
           as="ul"
           stagger={0.1}
-          className="mx-auto grid max-w-[1210px] grid-cols-2 gap-x-4 gap-y-10 pt-7 sm:gap-x-6 sm:gap-y-16 lg:grid-cols-4"
+          className="mx-auto grid max-w-[1210px] ta-stack grid-cols-2 gap-x-4 gap-y-10 pt-7 sm:gap-x-6 sm:gap-y-16 lg:grid-cols-4"
         >
           {aboutStats.map((stat) => {
             const copy = dict.aboutStats[stat.id];

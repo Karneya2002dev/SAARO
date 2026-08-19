@@ -234,7 +234,7 @@ export function BookDriverDialog({
               />
               <label
                 htmlFor={`${id}-consent`}
-                className="text-[12px] leading-[1.5] text-muted"
+                className="cursor-pointer text-[12px] leading-[1.5] text-muted"
               >
                 {fields.consentLead}{" "}
                 <Link href={privacyHref} className="text-brand underline">
