@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { RupeeText } from "@/components/ui/Money";
 import { Reveal } from "@/components/ui/Reveal";
 import {
   privacySections,
@@ -46,6 +47,11 @@ const sectionsFor: Record<
  * Splits a clause on the {email} and {phone} tokens and renders each as a
  * live link, so the address and number stay in `siteConfig` rather than being
  * spelled out in the legal copy of every locale.
+ *
+ * Everything between the tokens goes through `RupeeText`, so a charge written
+ * in a clause gets the same drawn rupee sign as every figure elsewhere on the
+ * site rather than the ₹ character, which Poppins has no glyph for. Clauses
+ * with no amount in them pass straight through untouched.
  */
 function withContacts(text: string, email: string, phone: string): ReactNode[] {
   return text.split(/(\{email\}|\{phone\})/).map((part, index) => {
@@ -67,7 +73,7 @@ function withContacts(text: string, email: string, phone: string): ReactNode[] {
         </Link>
       );
     }
-    return part;
+    return <RupeeText key={index} text={part} />;
   });
 }
 

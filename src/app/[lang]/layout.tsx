@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Poppins, Noto_Sans_Tamil } from "next/font/google";
+import { Poppins, Tiro_Tamil } from "next/font/google";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
@@ -16,11 +16,19 @@ const poppins = Poppins({
 
 /* Poppins has no Tamil glyphs, so Tamil copy would fall back to whatever the
    OS provides and break the type system visually. This sits after Poppins in
-   the stack, so Latin text is unaffected in both locales. */
-const notoTamil = Noto_Sans_Tamil({
+   the stack, so Latin text is unaffected in both locales.
+
+   Tiro Tamil is published at a single weight, so the 500 to 800 this design
+   asks for have no real cut to load and the browser synthesises them. Synthesis
+   is deliberately left on: about one Tamil string in twelve carries a Latin word
+   inside it — "City முதல் Outstation வரை", "Saaro-வுடன் ஓட்டுங்கள்" — and
+   turning it off would set the Latin half of those headings at 700 against Tamil
+   at 400 on the same line. A uniformly faked bold reads better than a visible
+   step mid-heading. */
+const tiroTamil = Tiro_Tamil({
   variable: "--font-tamil",
   subsets: ["tamil"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400"],
   display: "swap",
 });
 
@@ -56,7 +64,7 @@ export default async function RootLayout({
     // choice is deliberate, so it stops warning and suppresses the smooth
     // scroll during route transitions.
     <html lang={lang} data-scroll-behavior="smooth">
-      <body className={`${poppins.variable} ${notoTamil.variable} antialiased`}>
+      <body className={`${poppins.variable} ${tiroTamil.variable} antialiased`}>
         <a
           href="#content"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-60 focus:rounded-full focus:bg-brand focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white"
