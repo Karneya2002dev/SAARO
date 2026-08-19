@@ -110,7 +110,7 @@ export function BookDriverDialog({
             onSubmit={(event) => event.preventDefault()}
             className="mt-6 flex flex-col"
           >
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
                 <label htmlFor={`${id}-name`} className={LABEL}>
                   {fields.name}
@@ -207,7 +207,7 @@ export function BookDriverDialog({
                   answer, as on the enquiry form. */}
               <fieldset className="sm:col-span-2">
                 <legend className={LABEL}>{fields.when}</legend>
-                <div className="mt-1.5 grid gap-4 sm:grid-cols-2">
+                <div className="mt-1.5 grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <input
                     name="date"
                     type="date"

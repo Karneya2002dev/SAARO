@@ -11,7 +11,7 @@ export async function OurCommitment() {
   return (
     <section className="bg-white py-10 sm:py-12 lg:py-16">
       <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-5 lg:px-6">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal stagger={0.12}>
             {/* Left-aligned and set in two weights, so this does not use the
                 shared centred SectionHeading. */}

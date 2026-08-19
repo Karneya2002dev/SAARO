@@ -31,7 +31,7 @@ export function EnquiryForm({
       </h2>
       <p className="mt-1.5 text-[13px] leading-[1.5] text-muted">{dict.blurb}</p>
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-2">
+      <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor={`${id}-name`} className={LABEL}>
             {dict.name}
@@ -125,7 +125,7 @@ export function EnquiryForm({
         {/* One label over both halves: the date and the time are one answer. */}
         <fieldset className="sm:col-span-2">
           <legend className={LABEL}>{dict.when}</legend>
-          <div className="mt-1.5 grid gap-4 sm:grid-cols-2">
+          <div className="mt-1.5 grid grid-cols-1 gap-4 sm:grid-cols-2">
             <input
               name="date"
               type="date"

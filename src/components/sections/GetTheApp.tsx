@@ -54,7 +54,7 @@ export async function GetTheApp() {
               full width down a 1000px-wide panel. */}
           <Reveal
             stagger={0.14}
-            className="grid gap-12 md:grid-cols-2 md:gap-10 lg:grid-cols-[minmax(0,1fr)_230px_265px] lg:gap-8 xl:gap-10"
+            className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-10 lg:grid-cols-[minmax(0,1fr)_230px_265px] lg:gap-8 xl:gap-10"
           >
             {/* ---- Copy + download cards ---- */}
             <div className="md:col-span-2 lg:col-span-1 lg:pb-20">
@@ -80,7 +80,7 @@ export async function GetTheApp() {
 
               {/* Two-up wherever the column is wide enough; at lg the copy
                   column is too narrow for that, so the cards stack. */}
-              <div className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-1 xl:grid-cols-2">
+              <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-1 xl:grid-cols-2">
                 {appDownloads.map((app) => (
                   <DownloadCard key={app.id} app={app.id} dict={dict.downloads} />
                 ))}

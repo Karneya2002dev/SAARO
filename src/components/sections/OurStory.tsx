@@ -42,7 +42,7 @@ export async function OurStory() {
           </p>
         </Reveal>
 
-        <div className="mt-14 grid gap-10 lg:grid-cols-2 lg:gap-16">
+        <div className="mt-14 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
           <Reveal>
             <ImageSlot
               src={image.src}

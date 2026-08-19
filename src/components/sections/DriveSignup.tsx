@@ -25,7 +25,7 @@ export async function DriveSignup() {
         {/* The two panels are one card: no gap between them, and the rounding
             plus clipping live on the wrapper so their inner corners stay
             square where they meet. */}
-        <Reveal className="mx-auto grid max-w-[1110px] overflow-hidden rounded-2xl shadow-card lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)]">
+        <Reveal className="mx-auto grid grid-cols-1 max-w-[1110px] overflow-hidden rounded-2xl shadow-card lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)]">
           {/* ---- Pitch panel ---- */}
           <div className="flex flex-col bg-[#f7f2e8] p-6 sm:p-8">
             <h2 className="text-h3 font-bold leading-[1.2] tracking-[-0.02em]">

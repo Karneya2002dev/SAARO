@@ -18,7 +18,7 @@ export async function DriveSteps() {
           />
         </Reveal>
 
-        <div className="mt-12 grid items-center gap-12 sm:mt-14 lg:grid-cols-2 lg:gap-16">
+        <div className="mt-12 grid grid-cols-1 items-center gap-12 sm:mt-14 lg:grid-cols-2 lg:gap-16">
           <Reveal>
             <ImageSlot
               src={image.src}

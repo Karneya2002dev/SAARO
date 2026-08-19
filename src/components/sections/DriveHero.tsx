@@ -24,7 +24,7 @@ export async function DriveHero() {
   return (
     <section className="overflow-hidden bg-white py-10 sm:py-12 lg:py-16">
       <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-5 lg:px-6">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-14">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-14">
           <Reveal stagger={0.12}>
             <h1 className="text-hero font-bold leading-[1.25] tracking-[-0.025em]">
               <span className="block text-heading">{dict.drivePage.titleTop}</span>
@@ -38,7 +38,7 @@ export async function DriveHero() {
               {dict.drivePage.body}
             </p>
 
-            <ul className="mt-10 grid gap-6 sm:grid-cols-3 sm:gap-5">
+            <ul className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-5">
               {driveHighlights.map((highlight) => {
                 const copy = dict.drivePage.highlights[highlight.id];
 

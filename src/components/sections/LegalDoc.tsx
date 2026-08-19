@@ -115,7 +115,7 @@ export async function LegalDoc({ doc }: { doc: LegalDocId }) {
 
       <section className="bg-white py-10 sm:py-12 lg:py-16">
         <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-5 lg:px-6">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,240px)_minmax(0,1fr)] lg:gap-16">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,240px)_minmax(0,1fr)] lg:gap-16">
             {/* Follows the reader down the page on desktop; above the text on
                 mobile, where sticky would eat the viewport. */}
             <nav

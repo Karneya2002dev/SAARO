@@ -14,7 +14,7 @@ export async function ContactEnquiry() {
       <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-5 lg:px-6">
         {/* Map and form share one card, so the map stretches to whatever
             height the form ends up at rather than leaving a ragged edge. */}
-        <Reveal className="grid items-stretch gap-6 rounded-2xl bg-white p-5 shadow-card sm:p-6 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1fr)] lg:gap-8 lg:p-8">
+        <Reveal className="grid grid-cols-1 items-stretch gap-6 rounded-2xl bg-white p-5 shadow-card sm:p-6 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1fr)] lg:gap-8 lg:p-8">
           <Image
             src={map.src!}
             alt={dict.enquiry.mapAlt}
