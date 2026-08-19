@@ -83,18 +83,29 @@ export async function Footer() {
               {dict.footer.tagline}
             </p>
 
+            {/* Every destination is off-site, so these are plain anchors
+                opening in a new tab — routing them through `next/link` would
+                buy nothing, and taking someone off the site mid-booking to
+                reach a social page is worse than leaving it behind them.
+
+                A channel with a `null` href is one the business does not run;
+                it drops rather than rendering an icon that goes nowhere. */}
             <ul className="mt-7 flex items-center gap-3">
-              {socialLinks.map((social) => (
-                <li key={social.label}>
-                  <Link
-                    href={social.href}
-                    aria-label={social.label}
-                    className="grid size-9 place-items-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
-                  >
-                    {socialIcon[social.icon]}
-                  </Link>
-                </li>
-              ))}
+              {socialLinks.map((social) =>
+                social.href ? (
+                  <li key={social.label}>
+                    <a
+                      href={social.href}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      aria-label={social.label}
+                      className="grid size-9 place-items-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+                    >
+                      {socialIcon[social.icon]}
+                    </a>
+                  </li>
+                ) : null,
+              )}
             </ul>
           </div>
 

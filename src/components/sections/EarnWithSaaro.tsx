@@ -5,7 +5,7 @@ import { ArrowRight, Banknote, Clock, Crown, TrendUp } from "@/components/icons"
 import { Parallax } from "@/components/ui/Parallax";
 import { Reveal } from "@/components/ui/Reveal";
 import { driverPerks, type DriverPerkIcon } from "@/lib/content";
-import { getDictionary } from "@/lib/i18n";
+import { getDictionary, getLocale } from "@/lib/i18n";
 
 const iconFor: Record<DriverPerkIcon, ReactNode> = {
   clock: <Clock className="size-6" />,
@@ -15,7 +15,7 @@ const iconFor: Record<DriverPerkIcon, ReactNode> = {
 };
 
 export async function EarnWithSaaro() {
-  const dict = await getDictionary();
+  const [dict, locale] = await Promise.all([getDictionary(), getLocale()]);
 
   return (
     <section id="drive" className="scroll-mt-24 bg-white py-10 sm:py-12 lg:py-16">
@@ -63,8 +63,12 @@ export async function EarnWithSaaro() {
                 {dict.earn.bodyBottom}
               </p>
 
+              {/* The driver-recruitment pitch, so this goes to the drive page
+                  and lands on its application form — not to `#book`, which is
+                  the rider booking bar and does not exist on this page at all,
+                  leaving the button doing nothing. */}
               <Link
-                href="#book"
+                href={`/${locale}/drive#apply`}
                 className="mt-7 inline-flex min-h-12 w-fit items-center gap-2.5 rounded-full bg-accent px-6 text-[14px] font-semibold text-heading transition-colors hover:bg-accent/90 sm:text-[15px]"
               >
                 {dict.earn.cta}

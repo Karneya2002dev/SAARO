@@ -575,9 +575,51 @@ export const legalLinks: { id: LegalLinkId; href: string }[] = [
 
 export type SocialIcon = "facebook" | "instagram" | "youtube" | "whatsapp";
 
-export const socialLinks: { icon: SocialIcon; label: string; href: string }[] = [
-  { icon: "facebook", label: "Facebook", href: "#" },
-  { icon: "instagram", label: "Instagram", href: "#" },
-  { icon: "youtube", label: "YouTube", href: "#" },
-  { icon: "whatsapp", label: "WhatsApp", href: "#" },
+/**
+ * The only place the social destinations live — the footer reads them from
+ * here, so switching a channel is a one-line change.
+ *
+ * WhatsApp is derived from `siteConfig.phone`: wa.me wants the number in
+ * international form with no `+`, spaces or dashes, so it is stripped rather
+ * than written out again and left to drift from the number the rest of the site
+ * dials.
+ *
+ * !! Facebook, Instagram and YouTube are *searches* for the brand, not the
+ * accounts themselves. They resolve to a real page rather than a dead link,
+ * but they are placeholders: replace each with the profile URL once the
+ * account exists, e.g.
+ *   facebook:  "https://www.facebook.com/saaroacting"
+ *   instagram: "https://www.instagram.com/saaroacting"
+ *   youtube:   "https://www.youtube.com/@saaroacting"
+ *
+ * Setting an entry's `href` to `null` drops that icon from the footer, which
+ * is the right move for a channel the business does not run at all.
+ */
+const whatsappNumber = siteConfig.phone.replace(/\D/g, "");
+
+export const socialLinks: {
+  icon: SocialIcon;
+  label: string;
+  href: string | null;
+}[] = [
+  {
+    icon: "facebook",
+    label: "Facebook",
+    href: "https://www.facebook.com/search/top?q=Saaro%20Acting%20Call%20Drivers",
+  },
+  {
+    icon: "instagram",
+    label: "Instagram",
+    href: "https://www.instagram.com/explore/search/keyword/?q=Saaro%20Acting%20Call%20Drivers",
+  },
+  {
+    icon: "youtube",
+    label: "YouTube",
+    href: "https://www.youtube.com/results?search_query=Saaro+Acting+Call+Drivers",
+  },
+  {
+    icon: "whatsapp",
+    label: "WhatsApp",
+    href: `https://wa.me/${whatsappNumber}`,
+  },
 ];

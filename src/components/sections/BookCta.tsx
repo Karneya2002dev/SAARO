@@ -12,8 +12,14 @@ export async function BookCta() {
     <section id="book" className="scroll-mt-24 bg-white py-10 sm:py-12 lg:py-16">
       <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-5 lg:px-6">
         {/* Left padding at lg reserves the driver's column so the copy never
-            runs under him; below that he is hidden and the bar stacks. */}
-        <Reveal className="relative isolate mx-auto flex max-w-[1110px] flex-col gap-7 overflow-hidden lg:h-[220px] rounded-2xl bg-[#131a33] px-6 py-8 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:gap-10 lg:py-7 lg:pl-[210px] lg:pr-10">
+            runs under him; below that he is hidden and the bar stacks.
+
+            The design's 220px bar is a floor, not a fixed height. Both fit
+            inside it today, but the panel also clips, so a fixed height means
+            any future copy edit — or a Tamil string growing a line — is cut off
+            silently instead of pushing the bar taller. The driver is anchored
+            to the bottom edge, so he stays seated either way. */}
+        <Reveal className="relative isolate mx-auto flex max-w-[1110px] flex-col gap-7 overflow-hidden rounded-2xl bg-[#131a33] px-6 py-8 sm:px-8 lg:min-h-[220px] lg:flex-row lg:items-center lg:justify-between lg:gap-10 lg:py-7 lg:pl-[210px] lg:pr-10">
           {/* Cropped at the shins in the artwork, so he stands on the bar's
               bottom edge. h-auto keeps his aspect ratio intact. */}
           <Image
