@@ -133,9 +133,11 @@ export async function HowItWorks() {
             From `md` each step turns into a photo/copy pair: a single column
             would otherwise stretch the photo to ~900px at the top of this
             range, which dwarfs everything around it. */}
-        <Reveal
-          as="ol"
-          stagger={0.14}
+        {/* No `Reveal` here: the steps are handed in one at a time by the car
+            below as it drives past them, the same as on the desktop road. A
+            wrapper that faded the whole list in on arrival would animate the
+            same elements and undo that. */}
+        <ol
           /* Capped through the tablet band: left to fill, a row would reach
              ~880px just below `lg` and the photo would tower over its copy. */
           className="relative mt-10 flex flex-col gap-9 md:mx-auto md:max-w-215 md:gap-12 lg:hidden"
@@ -164,9 +166,12 @@ export async function HowItWorks() {
                  start clear of it vertically; from `md` there is room to clear
                  it sideways instead, so it becomes a marker level with its
                  row. */
-              <li key={step.id} className="relative pl-12 md:pl-24">
+              /* `data-road-step` hands this row to RoadCarVertical, which
+                 brings the marked parts in as the car reaches its badge. */
+              <li key={step.id} data-road-step className="relative pl-12 md:pl-24">
                 <StepBadge
                   number={step.number}
+                  data-road-part="badge"
                   className="absolute -left-1.5 top-1 z-10 h-11 w-[68px] text-[20px] md:top-1/2 md:-translate-y-1/2"
                 />
 
@@ -175,14 +180,16 @@ export async function HowItWorks() {
                       passes that at around a 550px viewport, and upscaling a
                       photo is worse than leaving white space beside it. The
                       two-column pair above never reaches the cap. */}
-                  <StepPhoto
-                    src={step.image}
-                    alt={copy.imageAlt}
-                    className="aspect-video w-full max-w-[461px] rounded-xl object-cover shadow-media"
-                  />
+                  <div data-road-part="photo">
+                    <StepPhoto
+                      src={step.image}
+                      alt={copy.imageAlt}
+                      className="aspect-video w-full max-w-[461px] rounded-xl object-cover shadow-media"
+                    />
+                  </div>
                   {/* Sized in one place so the two columns and the single
                       column read the same. */}
-                  <div className="mt-5 md:mt-0">
+                  <div className="mt-5 md:mt-0" data-road-part="copy">
                     <h3 className="text-h3 font-semibold tracking-[-0.02em] text-heading">
                       {copy.title}
                     </h3>
@@ -194,7 +201,7 @@ export async function HowItWorks() {
               </li>
             );
           })}
-        </Reveal>
+        </ol>
       </div>
     </section>
   );

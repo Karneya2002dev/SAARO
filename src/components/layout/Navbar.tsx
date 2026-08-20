@@ -46,13 +46,7 @@ function Wordmark({ home }: { home: string }) {
  * Swaps the `[lang]` segment in place, so the visitor stays on the section
  * they were reading. The hash is preserved by the browser across a push.
  */
-function LanguageToggle({
-  locale,
-  className,
-}: {
-  locale: Locale;
-  className?: string;
-}) {
+function LanguageToggle({ locale }: { locale: Locale }) {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -63,12 +57,7 @@ function LanguageToggle({
   };
 
   return (
-    <div
-      className={cn(
-        "inline-flex h-10 shrink-0 items-center rounded-full border border-line",
-        className,
-      )}
-    >
+    <div className="inline-flex h-10 shrink-0 items-center rounded-full border border-line">
       {locales.map((code, index) => (
         <div key={code} className="contents">
           {index > 0 ? <span aria-hidden className="h-4 w-px bg-line" /> : null}
@@ -199,18 +188,22 @@ export function Navbar({
           </ul>
         </nav>
 
+        {/* The language toggle rides in the bar at every width — it is small
+            enough to sit beside the sheet toggle on a phone. Booking is the
+            heavier action and keeps to the sheet until there is room for it. */}
         <div className="flex items-center gap-2.5 sm:gap-3">
-          {/* Visibility lives on a wrapper, not on the controls themselves.
-              Both build their own `inline-flex` into their base classes, and
-              `cn` only joins — so passing `hidden` alongside left two display
-              utilities of equal weight on one element, where Tailwind emits
-              `.inline-flex` after `.hidden` and the control stayed on screen at
+          {/* Visibility lives on a wrapper, not on the button itself. The pill
+              builds its own `inline-flex` into its base classes, and `cn` only
+              joins — so passing `hidden` alongside left two display utilities
+              of equal weight on one element, where Tailwind emits
+              `.inline-flex` after `.hidden` and the button stayed on screen at
               every width. `contents` makes the wrapper generate no box, so from
-              `sm` the buttons sit in this flex row exactly as before. */}
+              `sm` the pill sits in this flex row exactly as it would alone. */}
           <span className="hidden sm:contents">
             <BookDriverDialog {...bookProps} />
-            <LanguageToggle locale={locale} />
           </span>
+
+          <LanguageToggle locale={locale} />
 
           <button
             type="button"
@@ -219,7 +212,7 @@ export function Navbar({
             aria-controls="mobile-nav"
             aria-label={open ? dict.closeMenu : dict.openMenu}
             className={cn(
-              "inline-flex size-11 items-center justify-center rounded-full border border-line text-heading",
+              "inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-line text-heading",
               sheetOnly,
             )}
           >
@@ -264,9 +257,20 @@ export function Navbar({
             })}
           </ul>
 
-          <div className="flex flex-col gap-3 py-5 sm:hidden">
-            <BookDriverDialog {...bookProps} className="min-h-12 w-full text-[15px]" />
-            <LanguageToggle locale={locale} className="min-h-12 w-full justify-center" />
+          {/* Only below `sm` — from there the same button is in the bar, and
+              two of them would open on one screen. `triggerClassName` replaces
+              the bar pill's classes rather than adding to them: `cn` only
+              joins, so a second width or size utility would be settled by
+              Tailwind's output order, not by the one written last here. */}
+          <div className="py-4 sm:hidden">
+            <BookDriverDialog
+              {...bookProps}
+              triggerClassName={cn(
+                "inline-flex min-h-12 w-full items-center justify-center rounded-full",
+                "bg-brand px-6 text-[15px] font-medium text-white",
+                "transition-colors hover:bg-brand-dark",
+              )}
+            />
           </div>
         </nav>
       </div>

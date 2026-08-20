@@ -179,6 +179,74 @@ const DESCENT_WEIGHT = 2.5;
  */
 const REVEAL_LEAD = 90;
 
+/**
+ * Distance the phone car runs past a step's badge before that step appears,
+ * measured in px of its vertical travel. The straight road's answer to
+ * {@link REVEAL_LEAD}.
+ */
+const REVEAL_LEAD_Y = 32;
+
+/**
+ * The paused timeline that hands one step in.
+ *
+ * Built from `from` tweens, which matters twice over: the steps render in their
+ * final state, so they survive with JavaScript off, and reversing hides them
+ * again when the car backs up the road.
+ *
+ * Content enters from behind the car, so the drive appears to carry it in
+ * rather than the two just happening at once. Which way that is depends on the
+ * road, so `drift` is the caller's to set.
+ */
+function buildStepReveal(step: Element, drift: { x?: number; y?: number }) {
+  const part = (name: string) =>
+    step.querySelector<HTMLElement>(`[data-road-part="${name}"]`);
+
+  const badge = part("badge");
+  const photo = part("photo");
+  const copy = part("copy");
+  const reveal = gsap.timeline({ paused: true });
+
+  if (badge) {
+    reveal.from(
+      badge,
+      {
+        opacity: 0,
+        scaleY: 0.4,
+        y: -10,
+        // The tag reads as dropping onto the road, so it grows from the edge it
+        // hangs off rather than from its middle.
+        transformOrigin: "50% 100%",
+        duration: 0.45,
+        ease: "back.out(2.2)",
+      },
+      0,
+    );
+  }
+  if (photo) {
+    reveal.from(
+      photo,
+      { opacity: 0, ...drift, scale: 0.96, duration: 0.8, ease: "power3.out" },
+      0.05,
+    );
+  }
+  if (copy) {
+    reveal.from(
+      Array.from(copy.children),
+      {
+        opacity: 0,
+        x: (drift.x ?? 0) * 0.6,
+        y: (drift.y ?? 0) * 0.6,
+        duration: 0.65,
+        ease: "power3.out",
+        stagger: 0.08,
+      },
+      0.18,
+    );
+  }
+
+  return reveal;
+}
+
 /** Signed angle difference, wrapped to (-PI, PI]. */
 function wrapAngle(a: number) {
   return Math.atan2(Math.sin(a), Math.cos(a));
@@ -347,70 +415,18 @@ export function RoadCar({ className }: { className?: string }) {
       const pace = buildPacing(path, total);
       const cues = total ? rowCues(path, total) : [];
 
-      const part = (step: Element, name: string) =>
-        step.querySelector<HTMLElement>(`[data-road-part="${name}"]`);
-
-      /* One paused timeline per step. Built from `from` tweens, which matters
-         twice over: the steps render in their final state, so they survive with
-         JavaScript off, and reversing hides them again when the car backs up
-         the road. */
+      /* One paused timeline per step, cued to the arc length at which the car
+         reaches that step's row. The content drifts in along the row, against
+         the direction of travel. */
       const steps = Array.from(
         road?.querySelectorAll<HTMLElement>("[data-road-step]") ?? [],
       ).map((step, index) => {
         const cue = cues[index];
-        // Content enters from behind the car, so the drive appears to carry it
-        // in rather than the two just happening at once.
-        const drift = -24 * (cue?.heading ?? 1);
-        const badge = part(step, "badge");
-        const photo = part(step, "photo");
-        const copy = part(step, "copy");
 
-        const reveal = gsap.timeline({ paused: true });
-
-        if (badge) {
-          reveal.from(
-            badge,
-            {
-              opacity: 0,
-              scaleY: 0.4,
-              y: -10,
-              // The tag reads as dropping onto the road, so it grows from the
-              // edge it hangs off rather than from its middle.
-              transformOrigin: "50% 100%",
-              duration: 0.45,
-              ease: "back.out(2.2)",
-            },
-            0,
-          );
-        }
-        if (photo) {
-          reveal.from(
-            photo,
-            {
-              opacity: 0,
-              x: drift,
-              scale: 0.96,
-              duration: 0.8,
-              ease: "power3.out",
-            },
-            0.05,
-          );
-        }
-        if (copy) {
-          reveal.from(
-            Array.from(copy.children),
-            {
-              opacity: 0,
-              x: drift * 0.6,
-              duration: 0.65,
-              ease: "power3.out",
-              stagger: 0.08,
-            },
-            0.18,
-          );
-        }
-
-        return { at: cue?.at ?? 0, reveal };
+        return {
+          at: cue?.at ?? 0,
+          reveal: buildStepReveal(step, { x: -24 * (cue?.heading ?? 1) }),
+        };
       });
 
       // GSAP tweens the proxy; each frame we re-read it and move the car, which
@@ -497,6 +513,11 @@ export function RoadCar({ className }: { className?: string }) {
  *
  * The wrapper is inset to match the ends of the tarmac bar it drives on, which
  * lets the travel be a plain 0%–100% of that wrapper.
+ *
+ * It hands the steps in as it passes them, exactly as the desktop car does, so
+ * a phone reader meets them one at a time instead of the whole list arriving
+ * together. Same markup contract: `data-road-step` on each step, with the parts
+ * inside it marked `data-road-part`.
  */
 export function RoadCarVertical({ className }: { className?: string }) {
   const carRef = useRef<HTMLSpanElement>(null);
@@ -511,25 +532,80 @@ export function RoadCarVertical({ className }: { className?: string }) {
     const mm = gsap.matchMedia();
 
     mm.add("(max-width: 1023px)", () => {
-      const trigger = car.parentElement?.parentElement ?? car;
+      // The inset wrapper the car's 0%–100% is measured against, and the list
+      // holding both it and the steps.
+      const track = car.parentElement;
+      const list = track?.parentElement;
+      if (!track || !list) return;
 
-      const tween = gsap.fromTo(
-        car,
-        { top: "0%" },
-        {
-          top: "100%",
-          ease: "none",
-          scrollTrigger: {
-            trigger,
-            start: "top 70%",
-            end: "bottom 30%",
-            // Matched to the road car's lag so both read at the same weight.
-            scrub: 1.6,
-          },
+      const steps = Array.from(
+        list.querySelectorAll<HTMLElement>("[data-road-step]"),
+      ).map((step) => ({
+        step,
+        badge: step.querySelector<HTMLElement>('[data-road-part="badge"]'),
+        /** Fraction of the car's travel, filled in by `measure` below. */
+        at: 0,
+        // The road runs down the left of the list, so a step arrives off it.
+        reveal: buildStepReveal(step, { x: -20 }),
+      }));
+
+      /* Cued off `offsetTop`, which is layout position and therefore blind to
+         the transforms the reveals above put on these very elements — a
+         `getBoundingClientRect` would read a badge mid-animation and shift the
+         cue every time this re-ran. The badges are positioned against their
+         step and the step and track against the list, so the offsets compose.
+
+         The trade is that from `md`, where the badge is centred on its row with
+         a transform, layout position cannot see that shift and the cue lands
+         half a badge — 22px — late along a drive some thousands long. */
+      const measure = () => {
+        const height = track.offsetHeight || 1;
+
+        for (const s of steps) {
+          const badge = s.badge;
+          const y =
+            s.step.offsetTop +
+            (badge ? badge.offsetTop + badge.offsetHeight / 2 : 0) +
+            REVEAL_LEAD_Y;
+
+          s.at = gsap.utils.clamp(0, 1, (y - track.offsetTop) / height);
+        }
+      };
+
+      // Copy reflows and images settle after this first pass, so re-measure
+      // whenever ScrollTrigger recalculates rather than trusting one read.
+      measure();
+      ScrollTrigger.addEventListener("refresh", measure);
+
+      // GSAP tweens the proxy; each frame we re-read it, which keeps `scrub`'s
+      // easing while leaving the step cues to be checked against it.
+      const proxy = { progress: 0 };
+
+      const drive = (progress: number) => {
+        gsap.set(car, { top: `${progress * 100}%` });
+        for (const step of steps) {
+          if (progress >= step.at) step.reveal.play();
+          else step.reveal.reverse();
+        }
+      };
+
+      const tween = gsap.to(proxy, {
+        progress: 1,
+        ease: "none",
+        onUpdate: () => drive(proxy.progress),
+        scrollTrigger: {
+          trigger: list,
+          start: "top 70%",
+          end: "bottom 30%",
+          // Matched to the road car's lag so both read at the same weight.
+          scrub: 1.6,
         },
-      );
+      });
+
+      drive(0);
 
       return () => {
+        ScrollTrigger.removeEventListener("refresh", measure);
         tween.kill();
         gsap.set(car, { top: "0%" });
       };
